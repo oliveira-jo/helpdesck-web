@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    Meus Tickets
+  </div>
+
+  <div class="table-responsive">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Assunto</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td>
+            {{ticket.subject}}
+          </td>
+          <td>
+            <button class="btn btn-primary btn-sm" [routerLink]="['/tickets', ticket.id , 'update']">
+              <i class="fa fa-edit"></i>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
