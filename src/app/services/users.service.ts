@@ -19,34 +19,21 @@ export class UsersService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
-
-
-  // **************************************************************************************
-  // estudar a questão de obter o token da session para poder passar nas outras
-  // requisições
-
-
   login(username: string, password: string): Observable<LoginResponse> {
-
     const urlLogin = `${environment.baseUrl}/api/v1/auth/login`;
-
-    return this.http.post<LoginResponse>(urlLogin, { username, password })
+    return this.http.post<any>(urlLogin, { username, password })
       .pipe(
         tap((response) => {
 
-          // *************************************************************** ??
           if (response.token === '') return;
 
-          localStorage.setItem('token', btoa(JSON.stringify(response['token'])));
+          localStorage.setItem('token', btoa(JSON.stringify(response['accessToken'])));
           localStorage.setItem('username', btoa(JSON.stringify(response['username'])));
-
           this.router.navigate(['/']);
 
-          // *************************************************************** ??
-          //console.log(localStorage.getItem('token')) 
         }),
         (catchError(this.handleError))
+
       );
   }
 
@@ -55,19 +42,19 @@ export class UsersService {
     this.router.navigate(['/users/login']);
   }
 
-  get getLoggedUser(): user {
+  get getLoggedUser(): any {
     return localStorage.getItem('username')
       ? JSON.parse(atob(localStorage.getItem('username')!))
       : null;
   }
 
-  get getIdUserLogged(): string | null | undefined {
+  get getIdUserLogged(): any {
     return localStorage.getItem('username')
       ? (JSON.parse(atob(localStorage.getItem('user')!)) as user).id
       : null;
   }
 
-  get getToken(): string {
+  get getUserToken(): any {
     return localStorage.getItem('token')
       ? JSON.parse(atob(localStorage.getItem('token')!))
       : null;
@@ -77,9 +64,8 @@ export class UsersService {
     return localStorage.getItem('token') ? true : false;
   }
 
-  // ******************************************************************
-  // ******************************************************************
 
+  // **********************************************************************************************************
   getUsers(): Observable<user[]> {
     return this.http.get<user[]>(this.urlApi)
       .pipe(

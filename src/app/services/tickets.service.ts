@@ -10,7 +10,9 @@ import { ticket } from '../models/ticket';
   providedIn: 'root'
 })
 export class TicketsService {
+
   private urlApi = `${environment.baseUrl}/api/v1/tickets`;
+
   private jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }

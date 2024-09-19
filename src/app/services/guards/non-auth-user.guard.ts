@@ -11,9 +11,8 @@ export class nonAuthUserGuard implements CanActivate {
     private router: Router) { }
 
   canActivate() {
-
     if (this.userService.userIsLogged) {
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
       return false;
     }
     return true;

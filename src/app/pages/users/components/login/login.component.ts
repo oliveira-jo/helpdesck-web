@@ -54,9 +54,16 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) return;
     this.userService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
       next: () => { console.log("success"), this.router.navigate(['/tickets']) },
-      error: () => console.log("error" + this.errorMessage),
+      error: () => {
+        console.log("error" + this.errorMessage),
+          this.errorMessage = 'Erro ao fazer o login!'
+      }
     })
 
+  }
+
+  closeAlert() {
+    this.errorMessage = '';
   }
 
 }

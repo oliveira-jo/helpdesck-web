@@ -25,11 +25,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getUsername() {
-    return this.userService.getLoggedUser
+    return this.userService.getLoggedUser;
   }
 
   isLogged() {
-    return this.userService.userIsLogged
+    return this.userService.userIsLogged;
   }
 
 }
