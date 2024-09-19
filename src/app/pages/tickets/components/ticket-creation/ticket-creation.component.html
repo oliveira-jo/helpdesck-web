@@ -27,32 +27,32 @@
         </div>
       </div>
 
-    </form>
+      <!-- actions -->
+      <div class="form-group row">
+        <div class="offset-md-2 col-md-6">
 
-    <!-- actions -->
-    <div class="form-group row">
-      <div class="offset-md-2 col-md-6">
+          <button class="btn btn-primary m-2" type="submit"
+            [title]="ticketForm.valid ? 'Salvar' : 'Desabilitade até validar campos' " [disabled]="!ticketForm.valid">
+            Salvar
+          </button>
+          <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" [routerLink]="['/tickets']">
+            Cancelar
+          </button>
+          <button class="btn btn-outline-danger m-2" *ngIf="pageTitle != 'AdicionarTicket' " type="button"
+            title="Excluir o ticket" (click)="deleteTicket()">
+            Excluir
+          </button>
 
-        <button class="btn btn-primary m-2" type="submit"
-          [title]="ticketForm.valid ? 'Salvar' : 'Desabilitade até validar campos' " [disabled]="!ticketForm.valid">
-          Salvar
-        </button>
-        <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" [routerLink]="['/tickets']">
-          Cancelar
-        </button>
-        <button class="btn btn-outline-danger m-2" *ngIf="pageTitle != 'AdicionarTicket' " type="button"
-          title="Excluir o ticket" (click)="deleteTicket()">
-          Excluir
-        </button>
-
+        </div>
       </div>
-    </div>
+
+    </form>
 
   </div>
 
 </div>
 
-<!-- alert error -->
-<div class="alert alertt-danger" *ngIf="errorMessage">
-  {{errorMessage}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+  <strong> {{errorMessage}} </strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
 </div>

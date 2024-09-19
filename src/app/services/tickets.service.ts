@@ -33,11 +33,9 @@ export class TicketsService {
   // }
 
   getTicket(id: string): Observable<ticket> {
-
     if (id === '') {
       return of(this.initTicket());
     }
-
     const urlId = `${this.urlApi}/${id}`;
     return this.http.get<ticket>(urlId)
       .pipe(
@@ -58,6 +56,7 @@ export class TicketsService {
       .pipe(
         catchError(this.handleError)
       );
+
   }
 
   delete(id: string) {
@@ -69,6 +68,7 @@ export class TicketsService {
   }
 
   private handleError(e: { error: { message: any; }; status: any; body: { error: any; }; }) {
+
     let msgErro: string;
     if (e.error instanceof ErrorEvent) {
       msgErro = `* Error * : ${e.error.message}`;

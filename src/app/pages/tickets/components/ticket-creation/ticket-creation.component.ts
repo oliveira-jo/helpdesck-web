@@ -78,7 +78,7 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
 
   getTicket(id: string): void {
     this.ticketsService.getTicket(id).subscribe(
-      (ticket: ticket) => this.showTicket(this.ticket),
+      (ticket: ticket) => this.showTicket(ticket),
       (error: any) => this.errorMessage = <any>error
 
     )
@@ -95,7 +95,7 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
     if (this.ticket.id == '') {
       this.pageTitle = 'Adicionar ticket';
     } else {
-      this.pageTitle = 'Editar ticket'
+      this.pageTitle = `Editar ticket ${this.ticket.id}`;
     }
 
     this.ticketForm.patchValue({
@@ -124,14 +124,15 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
 
       if (this.ticketForm.dirty) {
 
-        const t = { ...this.ticket, ...this.ticketForm.value };
-        if (t.id === '') {
-          this.ticketsService.create(t).subscribe( // POST
+        const newTicket = { ...this.ticket, ...this.ticketForm.value };
+
+        if (newTicket.id === '') {
+          this.ticketsService.create(newTicket).subscribe( // POST
             () => this.onSaveComplete(),
             (error: any) => this.errorMessage = <any>error
           );
         } else {
-          this.ticketsService.update(t).subscribe( // PUT
+          this.ticketsService.update(newTicket).subscribe( // PUT
             () => this.onSaveComplete(),
             (error: any) => this.errorMessage = <any>error
           );
@@ -149,6 +150,10 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
   onSaveComplete(): void {
     this.ticketForm.reset();
     this.router.navigate(['/tickets']);
+  }
+
+  closeAlert() {
+    this.errorMessage = '';
   }
 
 }

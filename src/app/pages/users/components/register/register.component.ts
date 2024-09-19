@@ -21,4 +21,8 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  closeAlert() {
+    this.errorMessage = '';
+  }
+
 }
