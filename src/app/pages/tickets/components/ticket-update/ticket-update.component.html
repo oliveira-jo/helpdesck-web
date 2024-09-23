@@ -1,0 +1,113 @@
+<div class="card  m-5">
+
+  <!-- Header -->
+  <div class="card-header">
+    <strong>
+      Editar Ticket
+    </strong>
+  </div>
+
+  <!-- form -->
+  <div class="card-body">
+
+    <form novalidate (ngSubmit)="saveTicket()" [formGroup]="ticketForm">
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label m-1" for="subject"> Assunto </label>
+        <div class="col-md-8">
+          <input class="form-control" type="text" id="subject" name="subject" placeholder="Type a subjct of ticket"
+            formControlName="subject">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="description"> Descrição </label>
+        <div class="col-md-8">
+          <textarea class="form-control m-2" name="description" id="description" rows="10"
+            placeholder="Type a tickets description" formControlName="description">
+          </textarea>
+        </div>
+      </div>
+
+      <div class="form-group row mt-4">
+        <label class="col-md-2 col-form-label" for="description"> Status </label>
+        <div class="col-md-8">
+          <!-- checkbox status -->
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" formControlName="status"
+              value="IN_PROGRESS" />
+            <label class="form-check-label" for="inlineCheckbox1">Processando</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" formControlName="status"
+              value="AWAITING_CUSTOMER_ANSWER" />
+            <label class="form-check-label" for="inlineCheckbox1">Aguardando Cliente</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" formControlName="status"
+              value="RESOLVED" />
+            <label class="form-check-label" for="inlineCheckbox3">Resolvido</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" formControlName="status"
+              value="CANCELLED" />
+            <label class="form-check-label" for="inlineCheckbox2">Cancelado</label>
+          </div>
+          <!-- 
+          OPEN, - when the ticket is created
+          IN_PROGRESS, - when hava a interaction or update in the ticket
+          AWAITING_CUSTOMER_ANSWER, - 
+          RESOLVED, -
+          CANCELLED -
+          -->
+        </div>
+      </div>
+
+
+      <!-- Ticket informations -->
+      <div class="form-group row  mt-4">
+        <label class="col-md-2 col-form-label" for="description"> Detalhes </label>
+        <div class="col-md-8">
+          <ng-container *ngIf="ticket">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Criado por: {{ticket.createdBy?.username}}</li>
+              <li class="list-group-item">Atendido por: {{ticket.supportUser?.username}}</li>
+
+              <li class="list-group-item">Criado na data: {{ticket.createdAt}}</li>
+
+              <li class="list-group-item">Status: {{ticket.status}}</li>
+              <li class="list-group-item">Modificado por: {{ticket.updatedBy?.username}}</li>
+              <li class="list-group-item">Data Modificaçao: {{ticket.updateAt}}</li>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- actions -->
+      <div class="form-group row mt-4">
+        <div class="offset-md-2 col-md-6">
+
+          <button class="btn btn-primary m-2" type="submit"
+            [title]="ticketForm.valid ? 'Salvar' : 'Desabilitade até validar campos' " [disabled]="!ticketForm.valid">
+            Salvar
+          </button>
+          <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" [routerLink]="['/tickets']">
+            Cancelar
+          </button>
+          <button class="btn btn-outline-danger m-2" type="button" title="Excluir o ticket" (click)="deleteTicket()">
+            Excluir
+          </button>
+
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+  <strong> {{errorMessage}} </strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+</div>

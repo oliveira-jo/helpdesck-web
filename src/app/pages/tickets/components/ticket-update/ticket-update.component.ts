@@ -7,17 +7,17 @@ import { NgIf } from '@angular/common';
 import { ticket } from '../../../../models/ticket';
 
 @Component({
-  selector: 'app-ticket-creation',
+  selector: 'app-ticket-update',
   standalone: true,
   imports: [
     NgIf,
     ReactiveFormsModule,
     RouterLink
   ],
-  templateUrl: './ticket-creation.component.html',
-  styleUrl: './ticket-creation.component.css'
+  templateUrl: './ticket-update.component.html',
+  styleUrl: './ticket-update.component.css'
 })
-export class TicketCreationComponent implements OnInit, OnDestroy {
+export class TicketUpdateComponent implements OnInit, OnDestroy {
 
   errorMessage: string = '';
   formMode!: string;
@@ -48,30 +48,70 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.formMode = 'new';
     this.ticketForm = this.fb.group({
       subject: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      description: ['', [Validators.minLength(3), Validators.maxLength(1000)]]
+      description: ['', [Validators.minLength(3), Validators.maxLength(1000)]],
+      status: ['', [Validators.required]]
     });
 
     this.subscription = this.route.paramMap.subscribe(
       params => {
         const id = params.get('id');
         const subject = params.get('subject');
+        const status = params.get('status');
 
         if (id == null || id == '') {
           const t: ticket = {
             id: '', subject: '', description: '', attachment: null,
             createdBy: null, supportUser: null, createdAt: '', status: '', updatedBy: null, updateAt: ''
           }
+          this.showTicket(t);
+        } else {
+          this.getTicket(id);
         }
-
       }
     );
+
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  getTicket(id: string): void {
+    this.ticketsService.getTicket(id).subscribe(
+      (ticket: ticket) => this.showTicket(ticket),
+      (error: any) => this.errorMessage = <any>error
+    )
+  }
+
+  showTicket(ticket: ticket): void {
+    if (this.ticketForm) {
+      this.ticketForm.reset();
+    }
+
+    this.ticket = ticket;
+
+    this.ticketForm.patchValue({
+      subject: this.ticket.subject,
+      description: this.ticket.description
+    });
+
+  }
+
+  deleteTicket(): void {
+    if (this.ticket.id == '') {
+      this.onSaveComplete();
+    } else {
+      if (confirm(`Tem certeza que deseja excluir o ticket: ${this.ticket.subject} ?`)) {
+        this.ticketsService.delete(this.ticket.id!).subscribe(
+          () => this.onSaveComplete(),
+          (error: any) => this.errorMessage = <any>error
+        );
+      }
+    }
   }
 
   saveTicket(): void {
@@ -79,15 +119,24 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
     if (this.ticketForm.valid) { // form validation
       if (this.ticketForm.dirty) { // method was modify from the beginning
 
+        // PUT METHOD
         const newTicket = { ...this.ticket, ...this.ticketForm.value };
-        this.ticketsService.create(newTicket).subscribe( // POST
-          () => this.router.navigate(['/tickets']),
+        this.ticketsService.update(newTicket).subscribe(
+          () => this.onSaveComplete(),
           (error: any) => this.errorMessage = <any>error
         );
+
+      } else {
+        this.onSaveComplete();
       }
     } else {
       this.errorMessage = 'Por favor, corrija os erros de validação.';
     }
+  }
+
+  onSaveComplete(): void {
+    this.ticketForm.reset();
+    this.router.navigate(['/tickets']);
   }
 
   closeAlert() {
