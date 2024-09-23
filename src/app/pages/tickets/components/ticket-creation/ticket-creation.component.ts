@@ -19,6 +19,12 @@ import { ticket } from '../../../../models/ticket';
 })
 export class TicketCreationComponent implements OnInit, OnDestroy {
 
+
+  IN_PROGRESS: boolean = true;
+  AWAITING_CUSTOMER_ANSWER: boolean = false;
+  RESOLVED: boolean = false;
+  CANCELLED: boolean = false;
+
   errorMessage: string = '';
   pageTitle: string = 'Adicionar de Ticket';
   formMode!: string;
@@ -62,7 +68,10 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
         const subject = params.get('subject');
 
         if (id == null || id == '') {
-          const t: ticket = { id: '', subject: '', description: '', attachment: null }
+          const t: ticket = {
+            id: '', subject: '', description: '', attachment: null,
+            createdBy: null, supportUser: null, createdAt: '', status: '', updatedBy: null, updateAt: ''
+          }
           this.showTicket(t);
         } else {
           this.getTicket(id);
@@ -95,7 +104,7 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
     if (this.ticket.id == '') {
       this.pageTitle = 'Adicionar ticket';
     } else {
-      this.pageTitle = `Editar ticket ${this.ticket.id}`;
+      this.pageTitle = `Editar ticket`;
     }
 
     this.ticketForm.patchValue({
@@ -132,6 +141,25 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
             (error: any) => this.errorMessage = <any>error
           );
         } else {
+
+          // check about status 
+          if (this.IN_PROGRESS == true) {
+            newTicket.status = 'IN_PROGRESS';
+            console.log('IN_PROGRESS' + this.IN_PROGRESS);
+          }
+          if (this.AWAITING_CUSTOMER_ANSWER == true) {
+            newTicket.status = 'AWAITING_CUSTOMER_ANSWER';
+            console.log('AWAITING_CUSTOMER_ANSWER' + this.AWAITING_CUSTOMER_ANSWER);
+          }
+          if (this.RESOLVED == true) {
+            newTicket.status = 'RESOLVED';
+            console.log('RESOLVED' + this.RESOLVED);
+          }
+          if (this.CANCELLED == true) {
+            newTicket.status = 'CANCELLED';
+            console.log('CANCELLED' + this.CANCELLED);
+          }
+
           this.ticketsService.update(newTicket).subscribe( // PUT
             () => this.onSaveComplete(),
             (error: any) => this.errorMessage = <any>error

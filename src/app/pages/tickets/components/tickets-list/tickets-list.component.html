@@ -23,6 +23,8 @@
       <thead>
         <tr>
           <th>Assunto</th>
+          <th>Criado por</th>
+          <th>Ticket Status</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -30,6 +32,12 @@
         <tr *ngFor="let ticket of tickets">
           <td>
             {{ticket.subject}}
+          </td>
+          <td>
+            {{ticket.createdBy?.username}}
+          </td>
+          <td>
+            {{ticket.status}}
           </td>
           <td>
             <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'update']">

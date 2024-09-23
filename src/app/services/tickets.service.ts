@@ -83,7 +83,14 @@ export class TicketsService {
       id: null,
       subject: null,
       description: null,
-      attachment: null
+      attachment: null,
+
+      createdBy: null,
+      supportUser: null,
+      createdAt: null,
+      status: null,
+      updatedBy: null,
+      updateAt: null
     }
   }
 

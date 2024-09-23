@@ -39,7 +39,7 @@ export class UsersService {
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['/users/login']);
+    this.router.navigate(['/']);
   }
 
   get getLoggedUser(): any {
