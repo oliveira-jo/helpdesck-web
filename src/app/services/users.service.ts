@@ -33,7 +33,6 @@ export class UsersService {
 
         }),
         (catchError(this.handleError))
-
       );
   }
 
@@ -48,11 +47,11 @@ export class UsersService {
       : null;
   }
 
-  get getIdUserLogged(): any {
-    return localStorage.getItem('username')
-      ? (JSON.parse(atob(localStorage.getItem('user')!)) as user).id
-      : null;
-  }
+  // get getIdUserLogged(): any {
+  //   return localStorage.getItem('username')
+  //     ? (JSON.parse(atob(localStorage.getItem('username')!)) as user).id
+  //     : null;
+  // }
 
   get getUserToken(): any {
     return localStorage.getItem('token')
@@ -65,22 +64,20 @@ export class UsersService {
   }
 
 
-  // **********************************************************************************************************
+  // ******************************************************************
+  // ******************************************************************
   getUsers(): Observable<user[]> {
-    return this.http.get<user[]>(this.urlApi)
+    return this.http.get<user[]>(this.urlApi + '/GetUsers')
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getUser(id: string): Observable<user> {
-
     if (id === '') {
       return of(this.initUser());
     }
-
     const urlId = `${this.urlApi}/${id}`;
-
     return this.http.get<user>(urlId)
       .pipe(
         catchError(this.handleError)

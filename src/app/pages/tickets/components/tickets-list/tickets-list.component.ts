@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { getTestBed } from '@angular/core/testing';
 
 import { TicketsService } from '../../../../services/tickets.service';
 import { RouterLink } from '@angular/router';

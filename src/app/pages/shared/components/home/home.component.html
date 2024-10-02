@@ -1,5 +1,77 @@
-<body>
-  <div class="container">
-    HOME
-  </div>
-</body>
+<main>
+  <!-- Initial Section -->
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light"><strong>Helpdesck</strong></h1>
+        <p class="lead text-muted">Serviço para ajudar pessoas a resolverrem probmemas relacionaldo ao uso de
+          equipamentos, sistemas, processos, etc. Baseado em gestão de chamados.
+        </p>
+        <p>
+          <a [routerLink]='["/"]' class="btn btn-primary m-2"> Mais informações</a>
+          <a [routerLink]='["/user/register"]' class="btn btn-secondary m-2">Se cadastre</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- Section 2 -->
+  <section class="py-5 text-center container">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>Conecte-se</h2>
+          <h5>Seus clientes querem tirar dúvidas antes contratar o Serviço e querem ajuda
+            imediatamente. Atenda Diretamente por um chat exclusivo de cada chamado.</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>Organize-se</h2>
+          <h5>Sua Equipe precisa de organização para direcionar cada conversa para a área adequada.
+            Você pode priorizar cada ticket por status.</h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>Escale</h2>
+          <h5>Aumente a produtividade dos agentes permitindo que eles gerenciem o suporte por canal
+            direto de chat.</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section 3 -->
+  <section class="py-5 text-center container">
+    <div class="h-100 p-5 text-bg-primary rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-4 fw-bold">Aumente a produtividade de sua equipe.</h1>
+        <p class="fs-4">Centralize o atendimento e aumente a produtividade de sua equipe. Veja como automatizar seus
+          processos, otimizar a gestão da sua equipe
+          e os resultados da sua
+          empresa.</p>
+        <button class="btn btn-success btn-lg" type="button">Faça um teste</button>
+      </div>
+    </div>
+  </section>
+  <!-- Section 4 -->
+  <section class="py-5 text-center container">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h3>Já enfrentou algum desses problemas?</h3>
+          <h6> Demora nos atendimentos e atrasos nos prazos.</h6>
+          <h6> Muitos clientes para gerenciar.</h6>
+          <h6> Falta de visão da sua operação de atendimento.</h6>
+          <h6> Não consegue metrificar a produtividade da equipe.</h6>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>O atendimento ao cliente pode ser desafiador. Mas o Helpdesk facilita a sua vida!</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+</main>

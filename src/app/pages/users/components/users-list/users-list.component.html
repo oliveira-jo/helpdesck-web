@@ -1,1 +1,57 @@
-<p>users-list works!</p>
+<div class="container">
+
+  <div class="card m-5">
+    <div class="card-header">
+
+      <div class="d-flex justify-content-between m-2">
+        <div>
+          <strong>
+            <h4> Usuários </h4>
+          </strong>
+        </div>
+        <div>
+          <!-- [routerLink]="['/tickets/create']" -->
+          <button class="btn btn-primary m-1" (click)="navegatiToNewUser()">
+            <i class="fa fa-plus"></i>
+            Novo Usuário
+          </button>
+          <button class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Novo Usuário Suporte
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>id:</th>
+            <th>Nome:</th>
+            <th>Username:</th>
+            <th>Email:</th>
+            <th>Ações:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td> {{user.id}} </td>
+            <td> {{user.name}} </td>
+            <td> {{user.username}} </td>
+            <td> {{user.email}} </td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/user', user.id , 'update']">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteUser(user.id!)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

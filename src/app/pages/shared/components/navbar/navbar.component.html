@@ -1,8 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow md-3">
     <div class="container">
-      <!-- [routerLink]='["/"]' -->
-      <a class="navbar-brand" [routerLink]='["/"]'>
+      <a class="navbar-brand">
         Helpdesk
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -18,15 +17,46 @@
             <a class="nav-link" [routerLink]='["/"]'>Link</a>
           </li>
         </ul>
+        <ul>
+          <li>
+
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
+              aria-pressed="true">
+              <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                <use href="#circle-half"></use>
+              </svg>
+              Auto
+              <svg class="bi ms-auto d-none" width="1em" height="1em">
+                <use href="#check2"></use>
+              </svg>
+            </button>
+
+          </li>
+        </ul>
+
         <form class="d-flex-2">
-
-          <button *ngIf="isLogged()" class="btn btn-outline-primary">{{getUsername()}}</button>
-          <button *ngIf="isLogged()" class="btn btn-dark" (click)="logout()">sair</button>
-
+          <div class="btn-group" *ngIf="isLogged()">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{getUsername()}}
+            </button>
+            <ul class="dropdown-menu">
+              <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/users"]'>Painel de Usuarios</a>
+              <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/tickets"]'>Painel de Tickets</a>
+              </li>
+              <li *ngIf="!isAdminLogged()"><a class="dropdown-item" [routerLink]="['/user', user.id, 'user']">Update</a>
+              </li>
+              <!-- passa o id ************************************************************************ -->
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="btn btn-outline-secondary w-100" (click)="logout()"> Sair </a></li>
+            </ul>
+          </div>
           <button *ngIf="!isLogged()" class="btn btn-outline-primary" [routerLink]='["/user/login"]'>login</button>
           <button *ngIf="!isLogged()" class="btn btn-dark" [routerLink]='["/user/register"]'>registrar</button>
-
         </form>
+
       </div>
     </div>
   </nav>

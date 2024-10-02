@@ -3,11 +3,11 @@
   <div class="card  m-5">
     <!-- Header -->
     <div class="card-header">
-      <strong>Registrar Usuário</strong>
+      <strong>Alterar Usuário</strong>
     </div>
     <div class="card-body">
       <!-- form -->
-      <form (ngSubmit)="saveUser()" [formGroup]="userForm">
+      <form (ngSubmit)="updateUser()" [formGroup]="userForm">
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label" for="name"> Name: </label>
           <div class="col-md-7">
@@ -29,21 +29,6 @@
               formControlName="username">
           </div>
         </div>
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="password"> Password: </label>
-          <div class="col-md-7">
-            <input class="form-control m-2" type="password" id="password" name="password" formControlName="password"
-              placeholder="Type your password">
-          </div>
-        </div>
-
-        <!-- <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="passwordConfirm"> Password Confirm: </label>
-          <div class="col-md-7">
-            <input class="form-control m-2" type="password" id="passwordConfirm" name="passwordConfirm"
-              formControlName="passwordConfirm" placeholder="Type your password">
-          </div>
-        </div> -->
         <!-- actions -->
         <div class="form-group row">
           <div class="offset-md-2 col-md-6">
@@ -51,8 +36,11 @@
               [title]="userForm.valid ? 'Salvar' : 'Desabilitado até validar campos' " [disabled]="!userForm.valid">
               Salvar
             </button>
-            <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" (click)="navegationHome()">
+            <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" (click)="navigate()">
               Cancelar
+            </button>
+            <button class="btn btn-outline-danger m-2" type="button" title="Excluir o ticket" (click)="deleteUser()">
+              Excluir
             </button>
           </div>
         </div>

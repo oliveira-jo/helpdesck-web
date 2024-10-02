@@ -1,18 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { user } from '../../../../models/user';
 import { UsersService } from '../../../../services/users.service';
+import { CustomvalidationService } from '../../../../services/customvalidation.service';
 
 @Component({
-  selector: 'app-ticket-creation',
+  selector: 'app-user-register',
   standalone: true,
   imports: [
     NgIf,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -20,7 +22,6 @@ import { UsersService } from '../../../../services/users.service';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   errorMessage: string = '';
-  pageTitle: string = 'Cadastrar Usuário';
   formMode!: string;
   user!: user;
   userForm!: FormGroup;
@@ -31,26 +32,34 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UsersService
+    private userService: UsersService,
+    //private customValidator: CustomvalidationService
 
   ) {
     this.validationMessages = {
+      name: {
+        required: 'Name é obrigatório',
+        minlength: 'Deter ter ao menos 3 catacteres',
+        maxlength: 'Deter ter no máximo 50 catacteres',
+      },
+      email: {
+        required: 'é obrigatório',
+        email: 'Formato email é obrigatório',
+      },
       username: {
         required: 'Username é obrigatório',
-        minlength: 'Dever ter ao menos 3 catacteres',
-        maxlength: 'Dever ter no máximo 20 catacteres',
+        minlength: 'Deter ter ao menos 3 catacteres',
+        maxlength: 'Deter ter no máximo 50 catacteres',
       },
       password: {
         required: 'Password é obrigatório',
-        minlength: 'Dever ter ao menos 6 catacteres',
+        minlength: 'Deter ter ao menos 3 catacteres',
+        maxlength: 'Deter ter no máximo 20 catacteres',
       },
-      name: {
-        required: 'Nome completo é obrigatório',
-        minlength: 'Dever ter ao menos 4 catacteres',
-        maxlength: 'Dever ter no máximo 20 catacteres',
-      },
-      email: {
-        required: 'Email é obrigatório',
+      passwordConfirm: {
+        required: 'Confirmação de Password é obrigatório',
+        minlength: 'Dever ter ao menos 3 caracteres',
+        maxlength: 'Deve ter no máximo 20 caracteres',
       }
     }
 
@@ -60,25 +69,23 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this.formMode = 'new';
 
-    this.userForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      // passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      email: ['', [Validators.required]]
-    });
+    this.userForm = this.fb.group(
+      {
+        name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+        email: ['', [Validators.email]],
+        username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        passwrodConfirm: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      }
+      // {
+      //   validator: this.matchPassword('password', 'passwordConfirm'),
+      // }
+    );
 
     this.subscription = this.route.paramMap.subscribe(
       params => {
-        const id = params.get('id');
-
-        if (id == null || id == '') {
-          const newUser: user = {
-            id: '', username: '', password: '', name: '', email: ''
-          }
-          this.showUser(newUser);
-        } else {
-          this.getUser(id);
+        const newUser: user = {
+          id: '', name: '', email: '', username: '', password: ''
         }
       }
     );
@@ -89,50 +96,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getUser(id: string): void {
-    this.userService.getUser(id).subscribe(
-      (user: user) => this.showUser(user),
-      (error: any) => this.errorMessage = <any>error
-
-    )
-  }
-
-  showUser(user: user): void {
-
-    if (this.userForm) {
-      this.userForm.reset();
-    }
-
-    this.user = user;
-
-    if (this.user.id == '') {
-      this.pageTitle = 'Adicionar Usuário';
-    } else {
-      this.pageTitle = `Editar Usuário`;
-    }
-
-    this.userForm.patchValue({
-      username: this.user.username,
-      password: this.user.password,
-      name: this.user.name,
-      email: this.user.email,
-    });
-
-  }
-
-  deleteUser(): void {
-    if (this.user.id == '') {
-      this.onSaveComplete();
-    } else {
-      if (confirm(`Tem certeza que deseja excluir o usuário: ${this.user.username} ?`)) {
-        this.userService.delete(this.user.id!).subscribe(
-          () => this.onSaveComplete(),
-          (error: any) => this.errorMessage = <any>error
-        );
-      }
-    }
-  }
-
   saveUser(): void {
 
     if (this.userForm.valid) {
@@ -141,17 +104,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
         const newUser = { ...this.user, ...this.userForm.value };
 
-        if (newUser.id === '') {
-          this.userService.register(newUser).subscribe( // POST
-            () => this.onSaveComplete(),
-            (error: any) => this.errorMessage = <any>error
-          );
-        } else {
-          this.userService.update(newUser).subscribe( // PUT
-            () => this.onSaveComplete(),
-            (error: any) => this.errorMessage = <any>error
-          );
-        }
+        // METHOD POST
+        this.userService.register(newUser).subscribe(
+          () => this.onSaveComplete(),
+          (error: any) => this.errorMessage = <any>error
+        );
+
 
       } else {
         this.onSaveComplete();
@@ -160,6 +118,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
     } else {
       this.errorMessage = 'Por favor, corrija os erros de validação.';
     }
+
+  }
+
+  matchPassword(password: string, passwordConfirm: string) {
+    return (formGroup: FormGroup) => {
+      if (password !== passwordConfirm)
+        this.errorMessage = 'Senhas Não São iguais'
+    }
+  }
+
+  navegationHome(): void {
+    this.onSaveComplete();
   }
 
   onSaveComplete(): void {
