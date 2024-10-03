@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../../services/users.service';
 import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { user } from '../../../../models/user';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -12,29 +11,43 @@ import { Observable } from 'rxjs';
   imports: [
     RouterLink,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
 
-  user!: user | any;
+  user: user | undefined;
 
-  constructor(
-    private userService: UsersService
-  ) { }
+  constructor(private userService: UsersService) { }
 
-  ngOnInit() {
-    this.user = this.userService.getLoggedUser;
+  ngOnInit(): void {
+    this.getUser();
   }
 
-  logout() {
-    this.userService.logout();
+  getUser() {
+    this.userService.getUserAuth().subscribe(
+      (user: user) => this.user = user,
+      (error: any) => console.log('Error when searching logged user')
+    );
+  }
+
+  getId() {
+    return this.user?.id;
+  }
+
+  getName() {
+    return this.user?.name;
   }
 
   getUsername() {
     return this.userService.getLoggedUser;
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
   isLogged() {

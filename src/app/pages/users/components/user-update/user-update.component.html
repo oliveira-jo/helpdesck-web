@@ -3,27 +3,27 @@
   <div class="card  m-5">
     <!-- Header -->
     <div class="card-header">
-      <strong>Alterar Usuário</strong>
+      <h4>Alterar Usuário</h4>
     </div>
     <div class="card-body">
       <!-- form -->
       <form (ngSubmit)="updateUser()" [formGroup]="userForm">
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="name"> Name: </label>
+          <label class="col-md-2 col-form-label" for="name"> <strong> Name: </strong> </label>
           <div class="col-md-7">
             <input class="form-control m-2" type="text" id="name" name="name" placeholder="Type your full name"
               formControlName="name">
           </div>
         </div>
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="email"> Email: </label>
+          <label class="col-md-2 col-form-label" for="email"> <strong> Email: </strong> </label>
           <div class="col-md-7">
             <input class="form-control m-2" type="email" id="email" name="email" placeholder="youremail@gmail.com"
               formControlName="email">
           </div>
         </div>
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="username"> Username: </label>
+          <label class="col-md-2 col-form-label" for="username"> <strong> Username: </strong> </label>
           <div class="col-md-7">
             <input class="form-control m-2" type="text" id="username" name="username" placeholder="Type a username"
               formControlName="username">
@@ -39,9 +39,9 @@
             <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" (click)="navigate()">
               Cancelar
             </button>
-            <button class="btn btn-outline-danger m-2" type="button" title="Excluir o ticket" (click)="deleteUser()">
+            <!-- <button class="btn btn-outline-danger m-2" type="button" title="Excluir o ticket" (click)="deleteUser()">
               Excluir
-            </button>
+            </button> -->
           </div>
         </div>
         <!-- Alert -->

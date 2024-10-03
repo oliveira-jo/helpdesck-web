@@ -28,7 +28,7 @@ export class UsersListComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       users => {
         this.users = users;
       },
@@ -51,7 +51,7 @@ export class UsersListComponent implements OnInit {
   }
 
   onSaveComplete() {
-    this.userService.getUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       users => {
         this.users = users;
       },

@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { UsersService } from '../../../../services/users.service';
 import { user } from '../../../../models/user';
 
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.invalid) return;
     this.userService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
-      next: () => { console.log("success"), this.router.navigate(['/tickets']) },
+      next: () => { this.router.navigate(['/tickets']) },
       error: () => {
         console.log("error" + this.errorMessage),
           this.errorMessage = 'Erro ao fazer o login!'

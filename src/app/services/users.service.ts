@@ -24,13 +24,10 @@ export class UsersService {
     return this.http.post<any>(urlLogin, { username, password })
       .pipe(
         tap((response) => {
-
           if (response.token === '') return;
-
           localStorage.setItem('token', btoa(JSON.stringify(response['accessToken'])));
           localStorage.setItem('username', btoa(JSON.stringify(response['username'])));
           this.router.navigate(['/']);
-
         }),
         (catchError(this.handleError))
       );
@@ -47,12 +44,6 @@ export class UsersService {
       : null;
   }
 
-  // get getIdUserLogged(): any {
-  //   return localStorage.getItem('username')
-  //     ? (JSON.parse(atob(localStorage.getItem('username')!)) as user).id
-  //     : null;
-  // }
-
   get getUserToken(): any {
     return localStorage.getItem('token')
       ? JSON.parse(atob(localStorage.getItem('token')!))
@@ -63,17 +54,21 @@ export class UsersService {
     return localStorage.getItem('token') ? true : false;
   }
 
+  getUserAuth(): Observable<user> {
+    return this.http.get<user>(`${environment.baseUrl}/api/v1/auth`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
-  // ******************************************************************
-  // ******************************************************************
-  getUsers(): Observable<user[]> {
+  getAllUsers(): Observable<user[]> {
     return this.http.get<user[]>(this.urlApi + '/GetUsers')
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getUser(id: string): Observable<user> {
+  getUserById(id: string): Observable<user> {
     if (id === '') {
       return of(this.initUser());
     }

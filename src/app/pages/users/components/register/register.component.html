@@ -1,49 +1,50 @@
 <div class="container">
 
-  <div class="card  m-5">
+  <div class="card m-5">
     <!-- Header -->
     <div class="card-header">
-      <strong>Registrar Usuário</strong>
+      <h4>Registrar Usuário</h4>
     </div>
     <div class="card-body">
       <!-- form -->
       <form (ngSubmit)="saveUser()" [formGroup]="userForm">
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="name"> Name: </label>
-          <div class="col-md-7">
+          <label class="col-md-2 col-form-label" for="name"> <strong> Name: </strong> </label>
+          <div class="col-md-8">
             <input class="form-control m-2" type="text" id="name" name="name" placeholder="Type your full name"
               formControlName="name">
           </div>
         </div>
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="email"> Email: </label>
-          <div class="col-md-7">
+          <label class="col-md-2 col-form-label" for="email"> <strong> Email: </strong> </label>
+          <div class="col-md-8">
             <input class="form-control m-2" type="email" id="email" name="email" placeholder="youremail@gmail.com"
               formControlName="email">
           </div>
         </div>
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="username"> Username: </label>
-          <div class="col-md-7">
+          <label class="col-md-2 col-form-label" for="username"> <strong> Username: </strong> </label>
+          <div class="col-md-8">
             <input class="form-control m-2" type="text" id="username" name="username" placeholder="Type a username"
               formControlName="username">
           </div>
         </div>
         <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="password"> Password: </label>
-          <div class="col-md-7">
+          <label class="col-md-2 col-form-label" for="password"> <strong> Password </strong>: </label>
+          <div class="col-md-8">
             <input class="form-control m-2" type="password" id="password" name="password" formControlName="password"
               placeholder="Type your password">
           </div>
         </div>
 
-        <!-- <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label" for="passwordConfirm"> Password Confirm: </label>
-          <div class="col-md-7">
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="passwordConfirm"> <strong> Password Confirm: </strong> </label>
+          <div class="col-md-8">
             <input class="form-control m-2" type="password" id="passwordConfirm" name="passwordConfirm"
               formControlName="passwordConfirm" placeholder="Type your password">
           </div>
-        </div> -->
+        </div>
+
         <!-- actions -->
         <div class="form-group row">
           <div class="offset-md-2 col-md-6">

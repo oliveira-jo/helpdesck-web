@@ -83,7 +83,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
 
   getUser(id: string): void {
 
-    this.userService.getUser(id).subscribe(
+    this.userService.getUserById(id).subscribe(
       (user: user) => this.showUser(user),
       (error: any) => this.errorMessage = <any>error
     )
@@ -139,7 +139,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
   }
 
   navigate() {
-    this.onSaveComplete();
+    this.router.navigate(['/home']);
   }
 
   onSaveComplete(): void {
