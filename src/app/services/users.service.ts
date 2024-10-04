@@ -27,7 +27,7 @@ export class UsersService {
           if (response.token === '') return;
           localStorage.setItem('token', btoa(JSON.stringify(response['accessToken'])));
           localStorage.setItem('username', btoa(JSON.stringify(response['username'])));
-          this.router.navigate(['/']);
+          //this.router.navigate(['/']);
         }),
         (catchError(this.handleError))
       );

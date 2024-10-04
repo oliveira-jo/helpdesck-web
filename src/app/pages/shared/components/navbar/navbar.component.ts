@@ -4,6 +4,7 @@ import { UsersService } from '../../../../services/users.service';
 import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { user } from '../../../../models/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -21,18 +22,23 @@ export class NavbarComponent implements OnInit {
 
   user: user | undefined;
 
-  constructor(private userService: UsersService) { }
-
-  ngOnInit(): void {
-    this.getUser();
-  }
-
-  getUser() {
+  constructor(private userService: UsersService) {
     this.userService.getUserAuth().subscribe(
       (user: user) => this.user = user,
       (error: any) => console.log('Error when searching logged user')
     );
   }
+
+  ngOnInit() {
+    // this.getUser();
+  }
+
+  // getUser() {
+  //   this.userService.getUserAuth().subscribe(
+  //     (user: user) => this.user = user,
+  //     (error: any) => console.log('Error when searching logged user')
+  //   );
+  // }
 
   getId() {
     return this.user?.id;
