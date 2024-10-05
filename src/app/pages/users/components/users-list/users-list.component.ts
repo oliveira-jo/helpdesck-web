@@ -13,6 +13,9 @@ import { UsersService } from '../../../../services/users.service';
     CommonModule,
     RouterLink,
   ],
+  providers: [
+    UsersService
+  ],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })

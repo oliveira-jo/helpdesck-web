@@ -13,7 +13,9 @@ import { UsersService } from '../../../../services/users.service';
     NgIf,
     ReactiveFormsModule,
     RouterLink,
-
+  ],
+  providers: [
+    UsersService
   ],
   templateUrl: './user-update.component.html',
   styleUrl: './user-update.component.css'
@@ -85,7 +87,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
 
     this.userService.getUserById(id).subscribe(
       (user: user) => this.showUser(user),
-      (error: any) => this.errorMessage = <any>error
+      (error: any) => console.log('UPDATE USER - error to search user ')//this.errorMessage = <any>error
     )
   }
 

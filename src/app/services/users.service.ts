@@ -4,10 +4,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { user } from '../models/user';
-import { LoginResponse } from '../models/login-response.type';
 
 @Injectable({
   providedIn: 'root'
@@ -17,48 +16,8 @@ export class UsersService {
   private urlApi = `${environment.baseUrl}/api/v1/users`;
   private jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
 
-  login(username: string, password: string): Observable<LoginResponse> {
-    const urlLogin = `${environment.baseUrl}/api/v1/auth/login`;
-    return this.http.post<any>(urlLogin, { username, password })
-      .pipe(
-        tap((response) => {
-          if (response.token === '') return;
-          localStorage.setItem('token', btoa(JSON.stringify(response['accessToken'])));
-          localStorage.setItem('username', btoa(JSON.stringify(response['username'])));
-          //this.router.navigate(['/']);
-        }),
-        (catchError(this.handleError))
-      );
-  }
-
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/']);
-  }
-
-  get getLoggedUser(): any {
-    return localStorage.getItem('username')
-      ? JSON.parse(atob(localStorage.getItem('username')!))
-      : null;
-  }
-
-  get getUserToken(): any {
-    return localStorage.getItem('token')
-      ? JSON.parse(atob(localStorage.getItem('token')!))
-      : null;
-  }
-
-  get userIsLogged(): boolean {
-    return localStorage.getItem('token') ? true : false;
-  }
-
-  getUserAuth(): Observable<user> {
-    return this.http.get<user>(`${environment.baseUrl}/api/v1/auth`)
-      .pipe(
-        catchError(this.handleError)
-      );
   }
 
   getAllUsers(): Observable<user[]> {

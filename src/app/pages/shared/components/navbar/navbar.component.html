@@ -18,22 +18,29 @@
             <a class="nav-link"> - id: {{ getId() }} - </a>
           </li>
         </ul>
-        <!-- ****************************************** Painel admin ****************************************** -->
+        <!-- ****************************************** ADMIN PAINEL ****************************************** -->
         <form class="d-flex" *ngIf="isAdminLogged()">
           <!-- *********************************************************************************************************************** -->
           <!-- Implement a Dashboard in the system, contain the number of users and tickets  -->
           <!-- <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/"]'>Dashboard</button> -->
-          <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/tickets"]'>Solicitações</button>
+
+
+          <!-- <button class="btn btn-outline-secondary m-2" type="submit"
+            (click)="navigateToTickets()">Solicitações</button> -->
+
+          <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/tickets']">Solicitações</button>
+
+
           <div class="btn-group">
             <button type="button" class="btn btn-outline-secondary dropdown-toggle m-2" data-bs-toggle="dropdown"
               aria-expanded="false">
               Usuários
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/users"]'>Usuarios Ativos</a> </li>
-              <!-- *********************************************************************************************************************** -->
-              <!-- Implement a role to active and desactive user avoid to delete permanentle user for the intantion to mantain the history -->
-              <!-- <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/"]'>Não ativos</a> </li> -->
+              <li><a class="dropdown-item" [routerLink]="['/users']">Usuarios Ativos</a>
+                <!-- *********************************************************************************************************************** -->
+                <!-- Implement a role to active and desactive user avoid to delete permanentle user for the intantion to mantain the history -->
+                <!-- <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/"]'>Não ativos</a> </li> -->
             </ul>
           </div>
           <div class="btn-group">
@@ -42,7 +49,7 @@
               Cadastros
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/"]'>Usuário</a>
+              <li *ngIf="isAdminLogged()"><a class="dropdown-item" (click)="navigateToNewUser()">Usuário</a>
                 <!-- *********************************************************************************************************************** -->
                 <!-- Implement the role about add a tecn user and mor admins -->
                 <!-- <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/"]'>Técnico</a>
@@ -52,7 +59,8 @@
           </div>
           <button class="btn btn-outline-secondary m-2" type="submit" (click)="logout()"> Sair</button>
         </form>
-        <!-- ****************************************** Painel Normal User ****************************************** -->
+
+        <!-- ****************************************** USER PAINEL ****************************************** -->
         <form class="d-flex" *ngIf="!isAdminLogged() && isLogged()">
           <!-- *********************************************************************************************************************** -->
           <!-- Implement a Dashboard in the system, contain the number of users and tickets  -->
@@ -60,8 +68,11 @@
           <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/tickets"]'>Solicitações</button>
           <!-- *********************************************************************************************************************** -->
           <!-- Implement the painel of dates of user and his management -->
-          <!-- <button class="btn btn-outline-secondary m-2" type="submit"
-            [routerLink]="['/user', getId() , 'update']">Gerenciar Conta </button> -->
+          <!-- <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/user', '{{getId()}}' , 'update']"> Gerenciar Conta </button> -->
+          <!-- <button class="btn btn-outline-secondary m-2" type="submit" (click)="userUpdate()"> Gerenciar Conta </button> -->
+          <button class="btn btn-outline-secondary m-2" type="submit" (click)="navigateUserUpdate()">
+            Gerenciar Conta </button>
+
           <button class="btn btn-outline-secondary m-2" type="submit" (click)="logout()"> Sair</button>
         </form>
         <!-- ****************************************** Login and Register ****************************************** -->
@@ -70,22 +81,9 @@
           <button class="btn btn-outline-secondary m-2" type="submit"
             [routerLink]='["/user/register"]'>registrar</button>
         </form>
-
-        <!-- ************************** Tests with user datas that get only before login and reload page 2 times  ************************** -->
-        <!-- <li class="nav-item">
-          <a class="nav-link"> {{ getId() }} </a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link"> {{getName()}} </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"> {{getId()}} </a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link"> {{ user.username }}</a>
-        </li> -->
-
       </div>
     </div>
   </nav>
 </header>
+
+<router-outlet></router-outlet>

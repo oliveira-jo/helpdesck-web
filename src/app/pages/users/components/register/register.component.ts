@@ -11,22 +11,24 @@ import { CustomvalidationService } from '../../../../services/customvalidation.s
   selector: 'app-user-register',
   standalone: true,
   imports: [
-    NgIf,
     ReactiveFormsModule,
     RouterLink,
-
+    NgIf,
+  ],
+  providers: [
+    UsersService
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  errorMessage: string = '';
+  public errorMessage: string = '';
+  private subscription!: Subscription
   formMode!: string;
   user!: user;
   userForm!: FormGroup;
   validationMessages: { [key: string]: { [key: string]: string } };
-  private subscription!: Subscription
 
   constructor(
     private fb: FormBuilder,
@@ -66,16 +68,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.createForm();
+  }
 
+  createForm() {
     this.formMode = 'new';
-
     this.userForm = this.fb.group(
       {
         name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
         email: ['', [Validators.email]],
         username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-        passwrodConfirm: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        passwordConfirm: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       }
       // {
       //   validator: this.matchPassword('password', 'passwordConfirm'),
@@ -89,7 +93,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
         }
       }
     );
-
   }
 
   ngOnDestroy(): void {

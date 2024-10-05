@@ -10,20 +10,27 @@ import { nonAuthUserGuard } from './services/guards/non-auth-user.guard';
 import { authUserGuard } from './services/guards/auth-user.guard';
 import { TicketUpdateComponent } from './pages/tickets/components/ticket-update/ticket-update.component';
 import { UserUpdateComponent } from './pages/users/components/user-update/user-update.component';
+import { NavbarComponent } from './pages/shared/components/navbar/navbar.component';
 
 export const routes: Routes = [
-  // Non Auth User
-  { path: '', component: HomeComponent }, // canActivate: [nonAuthUserGuard]
-  { path: 'home', component: HomeComponent }, // canActivate: [nonAuthUserGuard]
-  { path: 'user/login', component: LoginComponent }, // canActivate: [nonAuthUserGuard]
-  { path: 'user/register', component: RegisterComponent }, //canActivate: [nonAuthUserGuard]
 
-  // Just for User Auth
-  { path: 'users', component: UsersListComponent, canActivate: [authUserGuard] },
-  { path: 'user/:id/update', component: UserUpdateComponent, canActivate: [authUserGuard] },
+  { path: 'user/login', component: LoginComponent },
 
-  { path: 'tickets', component: TicketsListComponent, canActivate: [authUserGuard] },
-  { path: 'tickets/create', component: TicketCreationComponent, canActivate: [authUserGuard] },
-  { path: 'tickets/:id/update', component: TicketUpdateComponent, canActivate: [authUserGuard] },
+  {
+    path: '', component: NavbarComponent,
+    children: [
+      // Non Auth User - canActivate: [nonAuthUserGuard]
+      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
+      { path: 'user/register', component: RegisterComponent },
 
+      // Just for User Auth
+      { path: 'users', component: UsersListComponent, canActivate: [authUserGuard] },
+      { path: 'user/:id/update', component: UserUpdateComponent, canActivate: [authUserGuard] },
+      { path: 'tickets', component: TicketsListComponent, canActivate: [authUserGuard] },
+      { path: 'tickets/create', component: TicketCreationComponent, canActivate: [authUserGuard] },
+      { path: 'tickets/:id/update', component: TicketUpdateComponent, canActivate: [authUserGuard] },
+
+    ]
+  },
 ];

@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { NgIf } from '@angular/common';
 import { UsersService } from '../../../../services/users.service';
 import { user } from '../../../../models/user';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { user } from '../../../../models/user';
     NgIf
   ],
   providers: [
-    UsersService
+    AuthService
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -30,9 +31,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private userService: UsersService
+    private authService: AuthService
   ) {
   }
 
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
   login() {
 
     if (this.loginForm.invalid) return;
-    this.userService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
+    this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
       next: () => { this.router.navigate(['/tickets']) },
       error: () => {
         console.log("error" + this.errorMessage),

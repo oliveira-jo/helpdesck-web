@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UsersService } from '../../../../services/users.service';
 import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { user } from '../../../../models/user';
-import { Observable } from 'rxjs';
+import { AuthService } from '../../../../services/auth.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,10 @@ import { Observable } from 'rxjs';
     NgIf,
     ReactiveFormsModule,
     RouterLink,
+    RouterOutlet
+  ],
+  providers: [
+    AuthService
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -22,42 +27,39 @@ export class NavbarComponent implements OnInit {
 
   user: user | undefined;
 
-  constructor(private userService: UsersService) {
-    this.userService.getUserAuth().subscribe(
-      (user: user) => this.user = user,
-      (error: any) => console.log('Error when searching logged user')
-    );
+  constructor(private authService: AuthService, private router: Router) {
+
   }
 
   ngOnInit() {
-    // this.getUser();
   }
-
-  // getUser() {
-  //   this.userService.getUserAuth().subscribe(
-  //     (user: user) => this.user = user,
-  //     (error: any) => console.log('Error when searching logged user')
-  //   );
-  // }
 
   getId() {
-    return this.user?.id;
-  }
-
-  getName() {
-    return this.user?.name;
+    return this.authService.getIdLoggedUser;
   }
 
   getUsername() {
-    return this.userService.getLoggedUser;
+    return this.authService.getLoggedUser;
   }
 
   logout() {
-    this.userService.logout();
+    this.authService.logout();
   }
 
   isLogged() {
-    return this.userService.userIsLogged;
+    return this.authService.userIsLogged;
+  }
+
+  navigateUserUpdate() {
+    this.router.navigate([`/user/${this.getId()}/update`]);
+  }
+
+  navigateToNewUser() {
+    this.router.navigate(['/users/register']);
+  }
+
+  navigateToTickets() {
+    this.router.navigate(['/tickets']);
   }
 
   isAdminLogged() {

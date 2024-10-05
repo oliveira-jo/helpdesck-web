@@ -6,19 +6,19 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
-import { UsersService } from '../users.service';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class tokenInterceptor implements HttpInterceptor {
 
-  constructor(private userService: UsersService) { }
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
-    const token = this.userService.getUserToken;
+    const token = this.authService.getUserToken;
     const requestUrl: Array<any> = request.url.split('/');
     const apiUrl: Array<any> = environment.baseUrl.split('/');
 
@@ -35,7 +35,7 @@ export class tokenInterceptor implements HttpInterceptor {
       return next.handle(request).pipe(catchError(
 
         error => {
-          this.userService.logout();
+          this.authService.logout();
           return throwError(error);
         }
 

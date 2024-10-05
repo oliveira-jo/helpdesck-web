@@ -14,6 +14,9 @@ import { ticket } from '../../../../models/ticket';
     ReactiveFormsModule,
     RouterLink
   ],
+  providers: [
+    TicketsService
+  ],
   templateUrl: './ticket-creation.component.html',
   styleUrl: './ticket-creation.component.css'
 })

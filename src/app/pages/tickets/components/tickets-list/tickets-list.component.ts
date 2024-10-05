@@ -12,6 +12,9 @@ import { ticket } from '../../../../models/ticket';
     CommonModule,
     RouterLink
   ],
+  providers: [
+    TicketsService
+  ],
   templateUrl: './tickets-list.component.html',
   styleUrl: './tickets-list.component.css'
 })

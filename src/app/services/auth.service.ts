@@ -1,0 +1,72 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, throwError, of } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { catchError, tap } from 'rxjs/operators';
+
+import { LoginResponse } from '../models/login-response.type';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  login(username: string, password: string): Observable<LoginResponse> {
+    const urlLogin = `${environment.baseUrl}/api/v1/auth/login`;
+    return this.http.post<LoginResponse>(urlLogin, { username, password })
+      .pipe(
+        tap((response) => {
+          if (response.accessToken === '') return;
+          localStorage.setItem('token', btoa(JSON.stringify(response.accessToken)));
+          localStorage.setItem('username', btoa(JSON.stringify(response.username)));
+          localStorage.setItem('id', btoa(JSON.stringify(response.id)));
+          // console.log(response.accessToken)
+          // console.log(response.username)
+          // console.log(response.id)
+        }),
+        (catchError(this.handleError))
+      );
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
+
+  get getLoggedUser(): any {
+    return localStorage.getItem('username')
+      ? JSON.parse(atob(localStorage.getItem('username')!))
+      : null;
+  }
+
+  get getIdLoggedUser(): string | null | undefined {
+    return localStorage.getItem('id')
+      ? (JSON.parse(atob(localStorage.getItem('id')!)))
+      : null;
+  }
+
+  get getUserToken(): string {
+    return localStorage.getItem('token')
+      ? JSON.parse(atob(localStorage.getItem('token')!))
+      : null;
+  }
+
+  get userIsLogged(): boolean {
+    return localStorage.getItem('token') ? true : false;
+  }
+
+  private handleError(e: { error: { message: any; }; status: any; body: { error: any; }; }) {
+    let msgErro: string;
+    if (e.error instanceof ErrorEvent) {
+      msgErro = `* Error * : ${e.error.message}`;
+    } else {
+      msgErro = `* Error API. * StatusCode* : ${e.status}, Desc.: ${e.body.error}`;
+    }
+    return throwError(msgErro);
+  }
+
+}
