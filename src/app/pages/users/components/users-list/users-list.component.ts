@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
-import { user } from '../../../../models/user';
 import { UsersService } from '../../../../services/users.service';
+import { user } from '../../../../models/user';
 
 @Component({
   selector: 'app-users-list',
@@ -60,10 +60,6 @@ export class UsersListComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
-  }
-
-  navegatiToNewUser() {
-    this.router.navigate(['/user/register']);
   }
 
 }

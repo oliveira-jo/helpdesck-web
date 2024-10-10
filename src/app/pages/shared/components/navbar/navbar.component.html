@@ -9,13 +9,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- ****************************************** Apresentation ****************************************** -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link"> Olá, {{ getUsername() }} </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"> - id: {{ getId() }} - </a>
           </li>
         </ul>
         <!-- ****************************************** ADMIN PAINEL ****************************************** -->
@@ -23,14 +19,7 @@
           <!-- *********************************************************************************************************************** -->
           <!-- Implement a Dashboard in the system, contain the number of users and tickets  -->
           <!-- <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/"]'>Dashboard</button> -->
-
-
-          <!-- <button class="btn btn-outline-secondary m-2" type="submit"
-            (click)="navigateToTickets()">Solicitações</button> -->
-
           <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/tickets']">Solicitações</button>
-
-
           <div class="btn-group">
             <button type="button" class="btn btn-outline-secondary dropdown-toggle m-2" data-bs-toggle="dropdown"
               aria-expanded="false">
@@ -49,11 +38,11 @@
               Cadastros
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li *ngIf="isAdminLogged()"><a class="dropdown-item" (click)="navigateToNewUser()">Usuário</a>
+              <li><a class="dropdown-item" [routerLink]='["/user/register"]'>Usuário Padrão</a>
                 <!-- *********************************************************************************************************************** -->
                 <!-- Implement the role about add a tecn user and mor admins -->
-                <!-- <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/"]'>Técnico</a>
-              <li *ngIf="isAdminLogged()"><a class="dropdown-item" [routerLink]='["/"]'>admin</a> -->
+                <!-- <li><a class="dropdown-item" [routerLink]='["/"]'>Técnico</a> -->
+                <!-- <li><a class="dropdown-item" [routerLink]='["/"]'>Administrador</a> -->
               </li>
             </ul>
           </div>
@@ -63,17 +52,14 @@
         <!-- ****************************************** USER PAINEL ****************************************** -->
         <form class="d-flex" *ngIf="!isAdminLogged() && isLogged()">
           <!-- *********************************************************************************************************************** -->
-          <!-- Implement a Dashboard in the system, contain the number of users and tickets  -->
-          <!-- <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/"]'>Dashboard</button> -->
-          <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/tickets"]'>Solicitações</button>
+          <!-- Implement the Dashborad to user -->
+          <!-- <button class="btn btn-outline-secondary m-2" [routerLink]="['/']"> Dashboard </button> -->
+          <button class="btn btn-outline-secondary m-2" [routerLink]='["/tickets"]'>Solicitações</button>
           <!-- *********************************************************************************************************************** -->
-          <!-- Implement the painel of dates of user and his management -->
-          <!-- <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/user', '{{getId()}}' , 'update']"> Gerenciar Conta </button> -->
-          <!-- <button class="btn btn-outline-secondary m-2" type="submit" (click)="userUpdate()"> Gerenciar Conta </button> -->
-          <button class="btn btn-outline-secondary m-2" type="submit" (click)="navigateUserUpdate()">
+          <!-- Implement the painel of datas of user and his management -->
+          <button class="btn btn-outline-secondary m-2" [routerLink]="['/user', getId() ,'update']">
             Gerenciar Conta </button>
-
-          <button class="btn btn-outline-secondary m-2" type="submit" (click)="logout()"> Sair</button>
+          <button class="btn btn-outline-secondary m-2" (click)="logout()"> Sair</button>
         </form>
         <!-- ****************************************** Login and Register ****************************************** -->
         <form class="d-flex" *ngIf="!isLogged()">

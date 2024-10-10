@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
-import { user } from '../../../../models/user';
+
 import { UsersService } from '../../../../services/users.service';
+import { user } from '../../../../models/user';
 
 @Component({
   selector: 'app-user-update',
@@ -87,7 +88,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
 
     this.userService.getUserById(id).subscribe(
       (user: user) => this.showUser(user),
-      (error: any) => console.log('UPDATE USER - error to search user ')//this.errorMessage = <any>error
+      (error: any) => console.log('UPDATE USER - error to search user ' + error.message)//this.errorMessage = <any>error
     )
   }
 
@@ -138,10 +139,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
     } else {
       this.errorMessage = 'Por favor, corrija os erros de validação.';
     }
-  }
-
-  navigate() {
-    this.router.navigate(['/home']);
   }
 
   onSaveComplete(): void {

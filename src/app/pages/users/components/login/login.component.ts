@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { UsersService } from '../../../../services/users.service';
-import { user } from '../../../../models/user';
+
 import { AuthService } from '../../../../services/auth.service';
+import { user } from '../../../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
     if (this.loginForm.invalid) return;
     this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
       next: () => { this.router.navigate(['/tickets']) },
@@ -58,7 +57,6 @@ export class LoginComponent implements OnInit {
           this.errorMessage = 'Erro ao fazer o login!'
       }
     })
-
   }
 
   closeAlert() {

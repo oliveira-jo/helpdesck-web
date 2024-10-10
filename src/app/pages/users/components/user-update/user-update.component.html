@@ -36,12 +36,9 @@
               [title]="userForm.valid ? 'Salvar' : 'Desabilitado até validar campos' " [disabled]="!userForm.valid">
               Salvar
             </button>
-            <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" (click)="navigate()">
+            <button class="btn btn-outline-secondary m-2" title="cancelar" routerLink="['/home']">
               Cancelar
             </button>
-            <!-- <button class="btn btn-outline-danger m-2" type="button" title="Excluir o ticket" (click)="deleteUser()">
-              Excluir
-            </button> -->
           </div>
         </div>
         <!-- Alert -->

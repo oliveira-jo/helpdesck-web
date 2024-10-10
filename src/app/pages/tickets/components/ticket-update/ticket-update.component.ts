@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TicketsService } from '../../../../services/tickets.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
+
+import { TicketsService } from '../../../../services/tickets.service';
 import { ticket } from '../../../../models/ticket';
 
 @Component({

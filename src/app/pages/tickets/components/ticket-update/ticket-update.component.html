@@ -1,5 +1,4 @@
 <div class="container">
-
   <div class="card  m-5">
     <!-- Header -->
     <div class="card-header">
@@ -74,7 +73,7 @@
               [title]="ticketForm.valid ? 'Salvar' : 'Desabilitade até validar campos' " [disabled]="!ticketForm.valid">
               Salvar
             </button>
-            <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" [routerLink]="['/tickets']">
+            <button class="btn btn-outline-secondary m-2" title="cancelar" [routerLink]="['/tickets']">
               Cancelar
             </button>
             <button class="btn btn-outline-danger m-2" type="button" title="Excluir o ticket" (click)="deleteTicket()">
@@ -83,13 +82,12 @@
           </div>
         </div>
       </form>
-
     </div>
   </div>
   <!-- Alert  -->
   <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
     <strong> {{errorMessage}} </strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+    <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
   </div>
 
 </div>

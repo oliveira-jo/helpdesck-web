@@ -1,5 +1,4 @@
 <div class="container">
-
   <main class="form-signin">
     <!-- Form -->
     <form [formGroup]="loginForm">
@@ -24,7 +23,7 @@
       </button>
       <div class="checkbox mb-2">
       </div>
-      <button class="w-100 btn btn-lg btn-outline-secondary" type="button" title="cancelar" [routerLink]="['/home']">
+      <button class="w-100 btn btn-lg btn-outline-secondary" title="cancelar" [routerLink]="['/home']">
         Cancelar
       </button>
       <div class="checkbox mb-2"> </div>
@@ -34,7 +33,6 @@
   <!-- Alert   -->
   <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
     <strong> {{errorMessage}} </strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+    <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
   </div>
-
 </div>

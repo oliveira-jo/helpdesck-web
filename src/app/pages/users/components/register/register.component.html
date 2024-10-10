@@ -52,7 +52,7 @@
               [title]="userForm.valid ? 'Salvar' : 'Desabilitado até validar campos' " [disabled]="!userForm.valid">
               Salvar
             </button>
-            <button class="btn btn-outline-secondary m-2" type="button" title="cancelar" (click)="navegationHome()">
+            <button class="btn btn-outline-secondary m-2" title="cancelar" routerLink="['/home']">
               Cancelar
             </button>
           </div>
@@ -60,8 +60,7 @@
         <!-- Alert -->
         <div class="alert alert-danger m-2 alert-dismissible fade show" role="alert" *ngIf="errorMessage">
           <strong> {{errorMessage}} </strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-            (click)="closeAlert()"></button>
+          <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
         </div>
       </form>
     </div>

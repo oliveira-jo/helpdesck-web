@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { TicketsService } from '../../../../services/tickets.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
+
+import { TicketsService } from '../../../../services/tickets.service';
 import { ticket } from '../../../../models/ticket';
 
 @Component({
@@ -78,7 +79,6 @@ export class TicketCreationComponent implements OnInit, OnDestroy {
   }
 
   saveTicket(): void {
-
     if (this.ticketForm.valid) { // form validation
       if (this.ticketForm.dirty) { // method was modify from the beginning
 

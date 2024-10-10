@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { user } from '../models/user';
 
@@ -21,7 +21,7 @@ export class UsersService {
   }
 
   getAllUsers(): Observable<user[]> {
-    return this.http.get<user[]>(this.urlApi + '/GetUsers')
+    return this.http.get<user[]>(this.urlApi + '/GetUsers', { headers: this.jsonHeaders }) // add header
       .pipe(
         catchError(this.handleError)
       );
@@ -32,7 +32,7 @@ export class UsersService {
       return of(this.initUser());
     }
     const urlId = `${this.urlApi}/${id}`;
-    return this.http.get<user>(urlId)
+    return this.http.get<user>(urlId) //add header
       .pipe(
         catchError(this.handleError)
       );

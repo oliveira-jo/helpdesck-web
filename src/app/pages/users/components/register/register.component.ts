@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
-import { user } from '../../../../models/user';
+
 import { UsersService } from '../../../../services/users.service';
-import { CustomvalidationService } from '../../../../services/customvalidation.service';
+import { user } from '../../../../models/user';
 
 @Component({
   selector: 'app-user-register',
@@ -129,10 +129,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       if (password !== passwordConfirm)
         this.errorMessage = 'Senhas Não São iguais'
     }
-  }
-
-  navegationHome(): void {
-    this.onSaveComplete();
   }
 
   onSaveComplete(): void {

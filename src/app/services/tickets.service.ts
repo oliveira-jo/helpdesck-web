@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ticket } from '../models/ticket';
 
@@ -17,26 +17,18 @@ export class TicketsService {
   constructor(private http: HttpClient) { }
 
   getTickets(): Observable<ticket[]> {
-    return this.http.get<ticket[]>(this.urlApi)
+    return this.http.get<ticket[]>(this.urlApi, { headers: this.jsonHeaders }) //add header
       .pipe(
         catchError(this.handleError)
       );
   }
-
-  // getTickets2(): Observable<ticket[]> {
-  //   const response = this.http.get<ticket[]>(this.urlApi);
-  //   const resultPipe = response.pipe(
-  //       catchError(this.handleError)
-  //     );
-  //   return resultPipe;
-  // }
 
   getTicket(id: string): Observable<ticket> {
     if (id === '') {
       return of(this.initTicket());
     }
     const urlId = `${this.urlApi}/${id}`;
-    return this.http.get<ticket>(urlId)
+    return this.http.get<ticket>(urlId, { headers: this.jsonHeaders }) // add header
       .pipe(
         catchError(this.handleError)
       );
@@ -51,7 +43,7 @@ export class TicketsService {
 
   update(ticket: ticket) {
     const urlId = `${this.urlApi}/${ticket.id}`;
-    return this.http.put<ticket>(urlId, ticket, { headers: this.jsonHeaders })
+    return this.http.put<ticket>(urlId, ticket, { headers: this.jsonHeaders }) //add header
       .pipe(
         catchError(this.handleError)
       );

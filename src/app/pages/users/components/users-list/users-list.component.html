@@ -1,8 +1,6 @@
 <div class="container">
-
   <div class="card m-5">
     <div class="card-header">
-
       <div class="d-flex justify-content-between m-2">
         <div>
           <strong>
@@ -10,24 +8,22 @@
           </strong>
         </div>
         <div>
-          <!-- [routerLink]="['/tickets/create']" -->
-          <button class="btn btn-primary m-1" (click)="navegatiToNewUser()">
+          <button class="btn btn-primary m-1" routerLink="['/user/register']">
             <i class="fa fa-plus"></i>
             Novo Usuário
           </button>
-          <button class="btn btn-primary">
+          <!-- Implement the function about create a new support user -->
+          <!-- <button class="btn btn-primary">
             <i class="fa fa-plus"></i>
             Novo Usuário Suporte
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
-
     <div class="table-responsive">
       <table class="table mb-0">
         <thead>
           <tr>
-            <th>id:</th>
             <th>Nome:</th>
             <th>Username:</th>
             <th>Email:</th>
@@ -36,7 +32,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td> {{user.id}} </td>
             <td> {{user.name}} </td>
             <td> {{user.username}} </td>
             <td> {{user.email}} </td>
@@ -53,5 +48,4 @@
       </table>
     </div>
   </div>
-
 </div>

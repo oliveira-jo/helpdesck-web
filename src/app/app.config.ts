@@ -2,18 +2,21 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
-import { tokenInterceptor } from './services/interceptors/token.interceptor';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TokenInterceptor } from './services/interceptors/token.interceptor';
+
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    //provideHttpClient(withFetch()),
-    provideHttpClient(withInterceptorsFromDi()),
+    //The order matters here! First import your "old" interceptors 
+    //then just make sure that withInterceptorsFromDi is loaded after those
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: tokenInterceptor,
+      useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    provideRouter(routes),
+    provideHttpClient(withInterceptorsFromDi()),
   ]
 };

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 
 import { LoginResponse } from '../models/login-response.type';
-
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +23,6 @@ export class AuthService {
           localStorage.setItem('token', btoa(JSON.stringify(response.accessToken)));
           localStorage.setItem('username', btoa(JSON.stringify(response.username)));
           localStorage.setItem('id', btoa(JSON.stringify(response.id)));
-          // console.log(response.accessToken)
-          // console.log(response.username)
-          // console.log(response.id)
         }),
         (catchError(this.handleError))
       );
