@@ -11,6 +11,7 @@ import { authUserGuard } from './services/guards/auth-user.guard';
 import { TicketUpdateComponent } from './pages/tickets/components/ticket-update/ticket-update.component';
 import { UserUpdateComponent } from './pages/users/components/user-update/user-update.component';
 import { NavbarComponent } from './pages/shared/components/navbar/navbar.component';
+import { DashboardComponent } from './pages/users/components/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'user/register', component: RegisterComponent },
 
       // Just for User Auth
+      { path: 'users/dashbord', component: DashboardComponent, canActivate: [authUserGuard] },
       { path: 'users', component: UsersListComponent, canActivate: [authUserGuard] },
       { path: 'user/:id/update', component: UserUpdateComponent, canActivate: [authUserGuard] },
       { path: 'tickets', component: TicketsListComponent, canActivate: [authUserGuard] },

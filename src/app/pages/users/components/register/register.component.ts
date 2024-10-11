@@ -1,8 +1,8 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 import { UsersService } from '../../../../services/users.service';
 import { user } from '../../../../models/user';
@@ -14,6 +14,7 @@ import { user } from '../../../../models/user';
     ReactiveFormsModule,
     RouterLink,
     NgIf,
+    NgFor,
   ],
   providers: [
     UsersService
@@ -109,10 +110,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
         // METHOD POST
         this.userService.register(newUser).subscribe(
-          () => this.onSaveComplete(),
-          (error: any) => this.errorMessage = <any>error
-        );
+          () => {
 
+            if (confirm(`Usuário Cadastrado com Sucesso!`)) {
+              this.onSaveComplete()
+            }
+
+          },
+          (error: any) => {
+            this.errorMessage = <any>error
+            this.errorMessage = 'Erro ao Cadastrar Usuário, Tente Novamente!';
+          }
+        );
 
       } else {
         this.onSaveComplete();

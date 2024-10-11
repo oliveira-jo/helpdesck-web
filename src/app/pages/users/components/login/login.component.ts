@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       next: () => { this.router.navigate(['/tickets']) },
       error: () => {
         console.log("error" + this.errorMessage),
-          this.errorMessage = 'Erro ao fazer o login!'
+          this.errorMessage = 'Login ou Senha incorretos, tente novamente.'
       }
     })
   }

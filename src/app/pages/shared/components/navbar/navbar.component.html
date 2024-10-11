@@ -16,9 +16,8 @@
         </ul>
         <!-- ****************************************** ADMIN PAINEL ****************************************** -->
         <form class="d-flex" *ngIf="isAdminLogged()">
-          <!-- *********************************************************************************************************************** -->
-          <!-- Implement a Dashboard in the system, contain the number of users and tickets  -->
-          <!-- <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/"]'>Dashboard</button> -->
+          <button class="btn btn-outline-secondary m-2" type="submit"
+            [routerLink]="['/users/dashbord']">Dashboard</button>
           <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/tickets']">Solicitações</button>
           <div class="btn-group">
             <button type="button" class="btn btn-outline-secondary dropdown-toggle m-2" data-bs-toggle="dropdown"
@@ -51,9 +50,8 @@
 
         <!-- ****************************************** USER PAINEL ****************************************** -->
         <form class="d-flex" *ngIf="!isAdminLogged() && isLogged()">
-          <!-- *********************************************************************************************************************** -->
-          <!-- Implement the Dashborad to user -->
-          <!-- <button class="btn btn-outline-secondary m-2" [routerLink]="['/']"> Dashboard </button> -->
+          <button class="btn btn-outline-secondary m-2" type="submit"
+            [routerLink]="['/users/dashbord']">Dashboard</button>
           <button class="btn btn-outline-secondary m-2" [routerLink]='["/tickets"]'>Solicitações</button>
           <!-- *********************************************************************************************************************** -->
           <!-- Implement the painel of datas of user and his management -->
