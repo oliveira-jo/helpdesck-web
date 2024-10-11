@@ -70,7 +70,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
         const id = params.get('id');
 
         if (id == null || id == '') {
-          const newUser: user = { id: '', name: '', username: '', email: '', password: '' }
+          const newUser: user = { id: '', name: '', username: '', email: '', password: '', active: false }
           this.showUser(newUser);
         } else {
           this.getUser(id);

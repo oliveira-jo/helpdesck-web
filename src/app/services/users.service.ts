@@ -77,7 +77,8 @@ export class UsersService {
       username: null,
       password: null,
       name: null,
-      email: null
+      email: null,
+      active: false
     }
   }
 }

@@ -5,5 +5,6 @@ export interface user {
   email: string | null
   username: string | null,
   password: string | null,
+  active: boolean | null
 }
 

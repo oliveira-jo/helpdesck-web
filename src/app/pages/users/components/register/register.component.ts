@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.subscription = this.route.paramMap.subscribe(
       params => {
         const newUser: user = {
-          id: '', name: '', email: '', username: '', password: ''
+          id: '', name: '', email: '', username: '', password: '', active: false
         }
       }
     );
