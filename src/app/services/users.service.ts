@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 
 import { user } from '../models/user';
+import { NumberOfUsersResponse } from '../models/numberOfUsers-response.type';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,26 @@ export class UsersService {
 
   private urlApi = `${environment.baseUrl}/api/v1/users`;
   private jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+  public numberUsers: NumberOfUsersResponse;
 
   constructor(private http: HttpClient, private router: Router) {
+    this.numberUsers = this.numberOfUsers();
 
+  }
+
+  numberOfUsers(): any {
+    return this.http.get<NumberOfUsersResponse>(this.urlApi + '/numberOfUsers', { headers: this.jsonHeaders }) //add header
+      .subscribe({
+        next: NumberOfUsersResponse => {
+          this.numberUsers = NumberOfUsersResponse;
+        },
+        error: err => {
+          console.error('Observable emitted an error: ' + err);
+        },
+        complete: () => {
+          console.log('** Observable emitted the complete notification **');
+        }
+      });
   }
 
   getAllUsers(): Observable<user[]> {

@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+
 import { ticket } from '../models/ticket';
+import { StatusResponse } from '../models/status-response.type';
 
 
 @Injectable({
@@ -13,8 +15,27 @@ export class TicketsService {
 
   private urlApi = `${environment.baseUrl}/api/v1/tickets`;
   private jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private ticketResp: ticket[] = [];
+  public status: StatusResponse;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.status = this.numberStatusOfTickets();
+  }
+
+  numberStatusOfTickets(): any {
+    return this.http.get<StatusResponse>(this.urlApi + '/numberOfStatus', { headers: this.jsonHeaders }) //add header
+      .subscribe({
+        next: StatusResponse => {
+          this.status = StatusResponse;
+        },
+        error: err => {
+          console.error('Observable emitted an error: ' + err);
+        },
+        complete: () => {
+          console.log('** Observable emitted the complete notification **');
+        }
+      });
+  }
 
   getTickets(): Observable<ticket[]> {
     return this.http.get<ticket[]>(this.urlApi, { headers: this.jsonHeaders }) //add header
@@ -75,7 +96,6 @@ export class TicketsService {
       subject: null,
       description: null,
       attachment: null,
-
       createdBy: null,
       supportUser: null,
       createdAt: null,

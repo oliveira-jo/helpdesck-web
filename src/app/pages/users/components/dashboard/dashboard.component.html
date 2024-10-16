@@ -1,5 +1,3 @@
-<!-- <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4"> -->
-
 <div class="container">
 
   <main class="col-md-8 ms-sm-auto col-lg-12 p-5">
@@ -8,37 +6,94 @@
       <h1 class="h2">Dashboard</h1>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="row row-cols-1 row-cols-md-5 mb-5 text-center">
+
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-success">
+          <div class="card-header py-3 text-white bg-success border-success">
+            <h4 class="my-0 fw-normal">Solicitações Abertas</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"> {{ openTickets() }}
+              <small class="text-muted fw-light">/tickets</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Número de solicitações</li>
+              <li>Abertas</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-success">Solicitações</button>
+          </div>
+        </div>
+      </div>
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-danger">
           <div class="card-header py-3 text-white bg-danger border-danger">
-            <h4 class="my-0 fw-normal">Solicitações Pendentes</h4>
+            <h4 class="my-0 fw-normal">Solicitações Em Andamento</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">0<small class="text-muted fw-light">/tickets</small></h1>
+            <h1 class="card-title pricing-card-title"> {{ inProgressTickets() }}
+              <small class="text-muted fw-light">/tickets</small>
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Número de solicitações</li>
-              <li>Aguardando atendimento</li>
+              <li>Em andamento</li>
             </ul>
             <button type="button" class="w-100 btn btn-lg btn-outline-danger">Solicitações</button>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-success">
-          <div class="card-header py-3 text-white bg-success border-success">
-            <h4 class="my-0 fw-normal">Solicitações Concluidas</h4>
+        <div class="card mb-4 rounded-3 shadow-sm border-warning">
+          <div class="card-header py-3 text-white bg-warning border-warning">
+            <h4 class="my-0 fw-normal">Aguardando Cliente</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">0<small class="text-muted fw-light">/tickets</small></h1>
+            <h1 class="card-title pricing-card-title"> {{ awaitingTickets() }}
+              <small class="text-muted fw-light">/tickets</small>
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Número de solicitações</li>
-              <li>Concluidas</li>
+              <li>Aguardando Cliente</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-success">Solicitações</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-warning">Solicitações</button>
           </div>
         </div>
       </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-white bg-primary border-primary">
+            <h4 class="my-0 fw-normal">Solicitações Resolvidas</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"> {{ resolvedTickets() }}
+              <small class="text-muted fw-light">/tickets</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Número de solicitações</li>
+              <li>Resolvidas</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Solicitações</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+          <div class="card-header py-3 text-white bg-secondary border-secondary">
+            <h4 class="my-0 fw-normal">Solicitações Canceladas</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"> {{ cancelledTickets() }}
+              <small class="text-muted fw-light">/tickets</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Número de solicitações</li>
+              <li>Canceladas</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-secondary">Solicitações</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <h1 class="h2">Usuários</h1>
@@ -49,7 +104,9 @@
             <h4 class="my-0 fw-normal">Total de Usuários Ativos</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">0<small class="text-muted fw-light">/users</small></h1>
+            <h1 class="card-title pricing-card-title"> {{ totalOfDefaultUsers() }}
+              <small class="text-muted fw-light">/users</small>
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Número total de usuários</li>
               <li>Ativos no sistema</li>
@@ -64,7 +121,9 @@
             <h4 class="my-0 fw-normal">Total de Administradores</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">0<small class="text-muted fw-light">/admins</small></h1>
+            <h1 class="card-title pricing-card-title"> {{ totalOfAdmin() }}
+              <small class="text-muted fw-light">/admins</small>
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Número total de administradores</li>
               <li>Ativos no sistema</li>
@@ -79,7 +138,9 @@
             <h4 class="my-0 fw-normal">Total de Técnicos</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">0<small class="text-muted fw-light">/attendents</small></h1>
+            <h1 class="card-title pricing-card-title"> {{ totalOfAttendent() }}
+              <small class="text-muted fw-light">/attendents</small>
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Número total de técnicos</li>
               <li>Ativos no sistema</li>
