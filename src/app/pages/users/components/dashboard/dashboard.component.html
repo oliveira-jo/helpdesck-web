@@ -9,8 +9,8 @@
     <div class="row row-cols-1 row-cols-md-5 mb-5 text-center">
 
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-success">
-          <div class="card-header py-3 text-white bg-success border-success">
+        <div class="card mb-4 rounded-3 shadow-sm border-danger">
+          <div class="card-header py-3 text-white bg-danger border-danger">
             <h4 class="my-0 fw-normal">Solicitações Abertas</h4>
           </div>
           <div class="card-body">
@@ -21,7 +21,7 @@
               <li>Número de solicitações</li>
               <li>Abertas</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-success">Solicitações</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-danger">Solicitações</button>
           </div>
         </div>
       </div>
@@ -77,8 +77,8 @@
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-          <div class="card-header py-3 text-white bg-secondary border-secondary">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-white bg-primary border-primary">
             <h4 class="my-0 fw-normal">Solicitações Canceladas</h4>
           </div>
           <div class="card-body">
@@ -89,18 +89,18 @@
               <li>Número de solicitações</li>
               <li>Canceladas</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-secondary">Solicitações</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Solicitações</button>
           </div>
         </div>
       </div>
 
     </div>
 
-    <h1 class="h2">Usuários</h1>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <h1 class="h2" *ngIf="isLoggedAdmin()">Usuários</h1>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" *ngIf="isLoggedAdmin()">
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-white bg-primary border-primary">
+        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+          <div class="card-header py-3 text-white bg-secondary border-secondary">
             <h4 class="my-0 fw-normal">Total de Usuários Ativos</h4>
           </div>
           <div class="card-body">
@@ -111,13 +111,13 @@
               <li>Número total de usuários</li>
               <li>Ativos no sistema</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Usuários</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-secondary">Usuários</button>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-white bg-primary border-primary">
+        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+          <div class="card-header py-3 text-white bg-secondary border-secondary">
             <h4 class="my-0 fw-normal">Total de Administradores</h4>
           </div>
           <div class="card-body">
@@ -128,13 +128,13 @@
               <li>Número total de administradores</li>
               <li>Ativos no sistema</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Usuários</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-secondary">Usuários</button>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-white bg-primary border-primary">
+        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+          <div class="card-header py-3 text-white bg-secondary border-secondary">
             <h4 class="my-0 fw-normal">Total de Técnicos</h4>
           </div>
           <div class="card-body">
@@ -145,7 +145,7 @@
               <li>Número total de técnicos</li>
               <li>Ativos no sistema</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Usuários</button>
+            <button type="button" class="w-100 btn btn-lg btn-outline-secondary">Usuários</button>
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.invalid) return;
     this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
-      next: () => { this.router.navigate(['/tickets']) },
+      next: () => { this.router.navigate(['/users/dashbord']) },
       error: () => {
         console.log("error" + this.errorMessage),
           this.errorMessage = 'Login ou Senha incorretos, tente novamente.'

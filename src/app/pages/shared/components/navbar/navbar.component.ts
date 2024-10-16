@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isAdminLogged() {
-    if (this.getUsername() == 'admin')
+    if (this.authService.getLoggedUser == 'admin')
       return true;
     else
       return false;

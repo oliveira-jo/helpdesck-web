@@ -10,7 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdminLogged()">
             <a class="nav-link"> Olá, {{ getUsername() }} </a>
           </li>
         </ul>
@@ -45,7 +45,8 @@
               </li>
             </ul>
           </div>
-          <button class="btn btn-outline-secondary m-2" type="submit" (click)="logout()"> Sair</button>
+          <button class="btn btn-outline-secondary m-2" type="submit" (click)="logout()">
+            Sair</button>
         </form>
 
         <!-- ****************************************** USER PAINEL ****************************************** -->

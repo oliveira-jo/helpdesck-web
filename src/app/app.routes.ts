@@ -12,6 +12,7 @@ import { TicketUpdateComponent } from './pages/tickets/components/ticket-update/
 import { UserUpdateComponent } from './pages/users/components/user-update/user-update.component';
 import { NavbarComponent } from './pages/shared/components/navbar/navbar.component';
 import { DashboardComponent } from './pages/users/components/dashboard/dashboard.component';
+import { TicketDetailsComponent } from './pages/tickets/components/ticket-details/ticket-details.component';
 
 export const routes: Routes = [
 
@@ -32,6 +33,7 @@ export const routes: Routes = [
       { path: 'tickets', component: TicketsListComponent, canActivate: [authUserGuard] },
       { path: 'tickets/create', component: TicketCreationComponent, canActivate: [authUserGuard] },
       { path: 'tickets/:id/update', component: TicketUpdateComponent, canActivate: [authUserGuard] },
+      { path: 'tickets/:id/details', component: TicketDetailsComponent, canActivate: [authUserGuard] },
 
     ]
   },

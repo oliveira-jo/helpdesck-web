@@ -31,10 +31,13 @@
             <td> {{ticket.createdBy?.username}} </td>
             <td> {{ticket.status}} </td>
             <td>
-              <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'update']">
+              <button class="btn btn-outline-success btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'details']">
+                <i class="fa fa-eye"></i>
+              </button>
+              <button class="btn btn-outline-warning btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'update']">
                 <i class="fa fa-edit"></i>
               </button>
-              <button class="btn btn-outline-danger btn-sm" (click)="deleteTicket(ticket.id!)">
+              <button class="btn btn-outline-danger btn-sm  m-1" (click)="deleteTicket(ticket.id!)">
                 <i class="fa fa-trash"></i>
               </button>
             </td>
