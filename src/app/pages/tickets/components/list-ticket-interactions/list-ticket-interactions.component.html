@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between m-2">
+        <div>
+          <strong>
+            <h4> Tickets Interactions </h4>
+          </strong>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive m-2 p-2" *ngIf="ticketInteractions">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let interaction of ticketInteractions">
+            <td> Mensagem: {{ interaction.message }} </td>
+            <td> Criado por: {{ interaction.sentByUser.name }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

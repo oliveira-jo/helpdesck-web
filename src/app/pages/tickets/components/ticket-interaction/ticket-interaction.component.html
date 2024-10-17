@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="card  m-5">
+    <!-- Header -->
+    <div class="card-header">
+      <strong>
+        Ticket Interaction
+      </strong>
+    </div>
+    <!-- form -->
+    <div class="card-body">
+      <form novalidate (ngSubmit)="saveTicketInteraction()" [formGroup]="ticketInteractionForm">
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="message"> Mensagem: </label>
+          <div class="col-md-8">
+            <textarea class="form-control m-2" name="message" id="message" rows="10"
+              placeholder="Type a tickets message" formControlName="message">
+            </textarea>
+          </div>
+        </div>
+        <!-- actions -->
+        <div class="form-group row mt-4">
+          <div class="offset-md-2 col-md-6">
+            <button class="btn btn-primary m-2" type="submit"
+              [title]="ticketInteractionForm.valid ? 'Salvar' : 'Desabilitade até validar campos' "
+              [disabled]="!ticketInteractionForm.valid">
+              Salvar
+            </button>
+            <button class="btn btn-outline-secondary m-2" title="cancelar"
+              [routerLink]="['/tickets', ticketId , 'details']">
+              Voltar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Alert -->
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+    <strong> {{errorMessage}} </strong>
+    <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+  </div>
+</div>

@@ -5,13 +5,17 @@ import { CommonModule } from '@angular/common';
 
 import { ticket } from '../../../../models/ticket';
 import { TicketsService } from '../../../../services/tickets.service';
+import { TicketInteractionComponent } from "../ticket-interaction/ticket-interaction.component";
+import { ListTicketInteractionsComponent } from "../list-ticket-interactions/list-ticket-interactions.component";
 
 @Component({
   selector: 'app-ticket-details',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    TicketInteractionComponent,
+    ListTicketInteractionsComponent
   ],
   templateUrl: './ticket-details.component.html',
   styleUrl: './ticket-details.component.css'
@@ -30,11 +34,9 @@ export class TicketDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.subscription = this.route.paramMap.subscribe(
       params => {
         const id = params.get('id');
-
         if (id == null || id == '') {
           this.router.navigate(['/tickets'])
         } else {
@@ -42,7 +44,6 @@ export class TicketDetailsComponent implements OnInit {
         }
       }
     );
-
   }
 
   getTicket(id: string): void {
@@ -68,7 +69,5 @@ export class TicketDetailsComponent implements OnInit {
   onSaveComplete(): void {
     this.router.navigate(['/tickets']);
   }
-
-
 
 }

@@ -6,6 +6,8 @@ import { environment } from '../../environments/environment';
 
 import { ticket } from '../models/ticket';
 import { StatusResponse } from '../models/status-response.type';
+import { TicketInteraction } from '../models/ticket-interaction';
+import { TickerInteractionResponse } from '../models/ticket-interaction-response';
 
 
 @Injectable({
@@ -15,7 +17,6 @@ export class TicketsService {
 
   private urlApi = `${environment.baseUrl}/api/v1/tickets`;
   private jsonHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private ticketResp: ticket[] = [];
   public status: StatusResponse;
 
   constructor(private http: HttpClient) {
@@ -44,6 +45,14 @@ export class TicketsService {
       );
   }
 
+  getTicketInteractions(ticketId: string): Observable<TickerInteractionResponse[]> {
+    const urlInteraction = `${this.urlApi}/${ticketId}/interactions`;
+    return this.http.get<TickerInteractionResponse[]>(urlInteraction, { headers: this.jsonHeaders }) //add header
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getTicket(id: string): Observable<ticket> {
     if (id === '') {
       return of(this.initTicket());
@@ -57,6 +66,14 @@ export class TicketsService {
 
   create(ticket: ticket) {
     return this.http.post<ticket>(this.urlApi, ticket, { headers: this.jsonHeaders })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  createTicketInteraction(ticketId: string, tiecktInteraction: TicketInteraction) {
+    const urlInteraction = `${this.urlApi}/${ticketId}/interaction`;
+    return this.http.post<TicketInteraction>(urlInteraction, tiecktInteraction, { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );
@@ -83,9 +100,11 @@ export class TicketsService {
 
     let msgErro: string;
     if (e.error instanceof ErrorEvent) {
+      console.log(`* Error * : ${e.error.message}`);
       msgErro = `* Error * : ${e.error.message}`;
     } else {
       msgErro = `* Error API. * StatusCode* : ${e.status}, Desc.: ${e.body.error}`;
+      console.log(`* Error API. * StatusCode* : ${e.status}, Desc.: ${e.body.error}`);
     }
     return throwError(msgErro);
   }

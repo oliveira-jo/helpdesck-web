@@ -1,59 +1,65 @@
 <div class="container">
   <main class="col-md-8 ms-sm-auto col-lg-12 p-5">
+    <!-- TITLE -->
     <div
       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Ticket</h1>
-      <div>
-        <button type="button" class="btn btn-primary mt-2" [routerLink]="['/tickets']">
-          <i class="fa fa-backward-step"></i> Voltar </button>
-      </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 mb-2 text-center">
+    <div class="row row-cols-1 row-cols-md-1 mb-1 text-center">
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-          <div class="card-header py-3 text-white bg-secondary border-secondary">
-            <h4 class="my-0 fw-normal">Ticket Princial</h4>
-          </div>
+        <!-- <div class="card shadow-sm row-cols-md-2 flex-row"> -->
+        <div class="card shadow-sm flex-row">
+          <!-- TICKET SUBJECT -->
+          <!-- <div class="card shadow-sm"> -->
           <div class="card-body">
-            <h4 class="card-title pricing-card-title"> Assunto:
-              <small class="text-muted fw-light"> {{ticket.subject}} </small>
-            </h4>
+            <h3 class="card-title pricing-card-title"> Assunto:
+              <small class="text-muted fw-light"> {{ ticket.subject }} </small>
+            </h3>
             <h4 class="card-title pricing-card-title"> Descrição:
-              <small class="text-muted fw-light"> {{ticket.description}} </small>
+              <small class="text-muted fw-light"> {{ ticket.description }} </small>
             </h4>
-            <button type="button" class="w-100 btn btn-lg btn-outline-secondary mt-2"
-              [routerLink]="['/tickets', ticket.id , 'update']">
-              <i class="fa fa-edit"></i> Editar </button>
-            <button type="button" class="w-100 btn btn-lg btn-outline-danger mt-2" (click)="deleteTicket()">
-              <i class="fa fa-trash"></i> Excluir </button>
+          </div>
+          <!-- </div> -->
+          <!-- TICKET DETAILS -->
+          <div class="card shadow-sm border-secondary">
+            <div class="card-header py-3 text-higth text-white bg-secondary border-secondary">
+              <h4 class="my-0 fw-normal">Ticket Detalhes</h4>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title pricing-card-title"> Ticket Status:
+                <small class="text-muted fw-light"> {{ticket.status}} </small>
+              </h4>
+              <h4 class="card-title pricing-card-title"> Criado Por:
+                <small class="text-muted fw-light"> {{ticket.createdBy?.username}} </small>
+              </h4>
+              <h4 class="card-title pricing-card-title"> Data Criação:
+                <small class="text-muted fw-light"> {{ticket.createdAt | date}} </small>
+              </h4>
+              <h4 class="card-title pricing-card-title"> Atendido Por:
+                <small class="text-muted fw-light"> {{ticket.supportUser?.username}} </small>
+              </h4>
+              <h4 class="card-title pricing-card-title"> Modificado Por:
+                <small class="text-muted fw-light"> {{ticket.updatedBy?.username}} </small>
+              </h4>
+              <h4 class="card-title pricing-card-title"> Data Modificação:
+                <small class="text-muted fw-light"> {{ticket.updateAt | date}} </small>
+              </h4>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-          <div class="card-header py-3 text-white bg-secondary border-secondary">
-            <h4 class="my-0 fw-normal">Ticket Detalhes</h4>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title pricing-card-title"> Ticket Status:
-              <small class="text-muted fw-light"> {{ticket.status}} </small>
-            </h4>
-            <h4 class="card-title pricing-card-title"> Criado Por:
-              <small class="text-muted fw-light"> {{ticket.createdBy?.username}} </small>
-            </h4>
-            <h4 class="card-title pricing-card-title"> Data Criação:
-              <small class="text-muted fw-light"> {{ticket.createdAt | date}} </small>
-            </h4>
-            <h4 class="card-title pricing-card-title"> Atendido Por:
-              <small class="text-muted fw-light"> {{ticket.supportUser?.username}} </small>
-            </h4>
-            <h4 class="card-title pricing-card-title"> Modificado Por:
-              <small class="text-muted fw-light"> {{ticket.updatedBy?.username}} </small>
-            </h4>
-            <h4 class="card-title pricing-card-title"> Data Modificação:
-              <small class="text-muted fw-light"> {{ticket.updateAt | date}} </small>
-            </h4>
-          </div>
+        <!-- BUTTONS -->
+        <div id="buttons" class="py-3 text-white">
+          <button type="button" class="btn btn-success m-2"
+            [routerLink]="['/tickets', ticket.id , 'interaction','create']">
+            <i class="fa fa-edit"></i> Nova Interação </button>
+          <button type="button" class="btn btn-primary m-2" [routerLink]="['/tickets', ticket.id , 'update']">
+            <i class="fa fa-edit"></i> Editar </button>
+          <button type="button" class="btn btn-secondary m-2" [routerLink]="['/tickets']">
+            <i class="fa fa-edit"></i> Voltar </button>
+        </div>
+        <!-- LIST OF TICKET INTERACTIONS -->
+        <div>
+          <app-list-ticket-interactions></app-list-ticket-interactions>
         </div>
       </div>
     </div>
