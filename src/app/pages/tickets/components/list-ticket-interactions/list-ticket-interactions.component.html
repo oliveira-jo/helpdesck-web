@@ -15,6 +15,7 @@
           <tr *ngFor="let interaction of ticketInteractions">
             <td> Mensagem: {{ interaction.message }} </td>
             <td> Criado por: {{ interaction.sentByUser.name }} </td>
+            <td> Data: {{ interaction.createdAt | date }} </td>
           </tr>
         </tbody>
       </table>

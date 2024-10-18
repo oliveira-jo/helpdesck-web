@@ -4,7 +4,7 @@ export interface TickerInteractionResponse {
   id?: string,
   message: string,
   status: string,
-  attachments: string,
+  createdAt: Date,
   sentByUser: user,
-  updateAt: Date
+  attachments: string,
 }
