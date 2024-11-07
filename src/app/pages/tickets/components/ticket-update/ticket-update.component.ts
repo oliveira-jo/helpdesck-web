@@ -27,7 +27,6 @@ export class TicketUpdateComponent implements OnInit, OnDestroy {
   formMode!: string;
   ticket!: ticket;
   ticketForm!: FormGroup;
-  validationMessages: { [key: string]: { [key: string]: string } };
   private subscription!: Subscription
 
   constructor(
@@ -37,18 +36,6 @@ export class TicketUpdateComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService
 
   ) {
-    this.validationMessages = {
-      subject: {
-        required: 'Assunto é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 50 catacteres',
-      },
-      description: {
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 1000 catacteres',
-      }
-    }
-
   }
 
   ngOnInit() {
@@ -56,7 +43,7 @@ export class TicketUpdateComponent implements OnInit, OnDestroy {
     this.formMode = 'new';
     this.ticketForm = this.fb.group({
       subject: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      description: ['', [Validators.minLength(3), Validators.maxLength(1000)]],
+      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
       status: ['', [Validators.required]]
     });
 

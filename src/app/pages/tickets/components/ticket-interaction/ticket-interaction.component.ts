@@ -26,7 +26,6 @@ export class TicketInteractionComponent implements OnInit {
   ticketId!: string;
   ticketInteraction!: TicketInteraction;
   ticketInteractionForm!: FormGroup;
-  validationMessages: { [key: string]: { [key: string]: string } };
   private subscription!: Subscription
 
   constructor(
@@ -36,13 +35,7 @@ export class TicketInteractionComponent implements OnInit {
     private ticketsService: TicketsService
 
   ) {
-    this.validationMessages = {
-      message: {
-        required: 'Assunto é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 500 catacteres',
-      }
-    }
+
   }
 
   ngOnInit() {

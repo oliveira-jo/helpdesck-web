@@ -27,7 +27,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
   formMode!: string;
   user!: user;
   userForm!: FormGroup;
-  validationMessages: { [key: string]: { [key: string]: string } };
   private subscription!: Subscription
 
   constructor(
@@ -37,22 +36,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
     private userService: UsersService
 
   ) {
-    this.validationMessages = {
-      name: {
-        required: 'Name é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 50 catacteres',
-      },
-      email: {
-        required: 'é obrigatório',
-        email: 'Formato email é obrigatório',
-      },
-      username: {
-        required: 'Username é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 50 catacteres',
-      }
-    }
 
   }
 
@@ -61,8 +44,8 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
     this.formMode = 'new';
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
-      email: ['', [Validators.email]],
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     });
 
     this.subscription = this.route.paramMap.subscribe(
@@ -88,7 +71,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
 
     this.userService.getUserById(id).subscribe(
       (user: user) => this.showUser(user),
-      (error: any) => console.log('UPDATE USER - error to search user ' + error.message)//this.errorMessage = <any>error
+      (error: any) => console.log('UPDATE USER - error to search user ' + error.message),
     )
   }
 
@@ -105,6 +88,7 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
       username: this.user.username,
       email: this.user.email,
     });
+    console.log(this.user);
 
   }
 
@@ -136,8 +120,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
       } else {
         this.onSaveComplete();
       }
-    } else {
-      this.errorMessage = 'Por favor, corrija os erros de validação.';
     }
   }
 

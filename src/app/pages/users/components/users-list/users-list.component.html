@@ -1,14 +1,14 @@
 <div class="container">
+
   <div class="card m-5">
+
     <div class="card-header">
       <div class="d-flex justify-content-between m-2">
         <div>
-          <strong>
-            <h4> Usuários </h4>
-          </strong>
+          <h4 class="p-2"> Usuários </h4>
         </div>
         <div>
-          <button class="btn btn-primary m-1" routerLink="['/user/register']">
+          <button class="btn btn-primary m-1" [routerLink]='["/user/register"]'>
             <i class="fa fa-plus"></i>
             Novo Usuário
           </button>
@@ -20,7 +20,8 @@
         </div>
       </div>
     </div>
-    <div class="table-responsive">
+
+    <div class="table-responsive p-4">
       <table class="table mb-0">
         <thead>
           <tr>

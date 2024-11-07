@@ -2,9 +2,7 @@
   <div class="card  m-5">
     <!-- Header -->
     <div class="card-header">
-      <strong>
-        Ticket Interaction
-      </strong>
+      <h4> Ticket Interaction </h4>
     </div>
     <!-- form -->
     <div class="card-body">
@@ -15,6 +13,13 @@
             <textarea class="form-control m-2" name="message" id="message" rows="10"
               placeholder="Type a tickets message" formControlName="message">
             </textarea>
+            <div class="text-danger" *ngIf="ticketInteractionForm.controls['message'].invalid && 
+            (ticketInteractionForm.controls['message'].touched || ticketInteractionForm.controls['message'].dirty)">
+              <span *ngIf="ticketInteractionForm.controls['message'].errors?.['required']"> Campo é obrigatório!</span>
+              <span *ngIf="ticketInteractionForm.controls['message'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+              <span *ngIf="ticketInteractionForm.controls['message'].errors?.['maxlength']"> Máximo 5000
+                caracteres!</span>
+            </div>
           </div>
         </div>
         <!-- actions -->

@@ -1,6 +1,6 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
 
@@ -12,6 +12,7 @@ import { user } from '../../../../models/user';
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    FormsModule,
     RouterLink,
     NgIf,
     NgFor,
@@ -29,42 +30,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   formMode!: string;
   user!: user;
   userForm!: FormGroup;
-  validationMessages: { [key: string]: { [key: string]: string } };
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UsersService,
-    //private customValidator: CustomvalidationService
 
   ) {
-    this.validationMessages = {
-      name: {
-        required: 'Name é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 50 catacteres',
-      },
-      email: {
-        required: 'é obrigatório',
-        email: 'Formato email é obrigatório',
-      },
-      username: {
-        required: 'Username é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 50 catacteres',
-      },
-      password: {
-        required: 'Password é obrigatório',
-        minlength: 'Deter ter ao menos 3 catacteres',
-        maxlength: 'Deter ter no máximo 20 catacteres',
-      },
-      passwordConfirm: {
-        required: 'Confirmação de Password é obrigatório',
-        minlength: 'Dever ter ao menos 3 caracteres',
-        maxlength: 'Deve ter no máximo 20 caracteres',
-      }
-    }
 
   }
 
@@ -76,15 +49,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.formMode = 'new';
     this.userForm = this.fb.group(
       {
-        name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
-        email: ['', [Validators.email]],
+        name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+        email: ['', [Validators.required, Validators.email]],
         username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         passwordConfirm: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       }
-      // {
-      //   validator: this.matchPassword('password', 'passwordConfirm'),
-      // }
     );
 
     this.subscription = this.route.paramMap.subscribe(
@@ -106,38 +76,31 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
       if (this.userForm.dirty) {
 
-        const newUser = { ...this.user, ...this.userForm.value };
+        if (this.userForm.controls['password'].value === this.userForm.controls['passwordConfirm'].value) {
+          const newUser = { ...this.user, ...this.userForm.value };
+          // METHOD POST
+          this.userService.register(newUser).subscribe(
+            () => {
 
-        // METHOD POST
-        this.userService.register(newUser).subscribe(
-          () => {
+              if (confirm(`Usuário Cadastrado com Sucesso!`)) {
+                this.onSaveComplete()
+              }
 
-            if (confirm(`Usuário Cadastrado com Sucesso!`)) {
-              this.onSaveComplete()
+            },
+            (error: any) => {
+              this.errorMessage = <any>error
+              this.errorMessage = 'Erro ao Cadastrar Usuário, Tente Novamente!';
             }
+          );
 
-          },
-          (error: any) => {
-            this.errorMessage = <any>error
-            this.errorMessage = 'Erro ao Cadastrar Usuário, Tente Novamente!';
-          }
-        );
-
+        } else {
+          this.errorMessage = 'As senhas não são iguais!';
+        }
       } else {
         this.onSaveComplete();
       }
-
-    } else {
-      this.errorMessage = 'Por favor, corrija os erros de validação.';
     }
 
-  }
-
-  matchPassword(password: string, passwordConfirm: string) {
-    return (formGroup: FormGroup) => {
-      if (password !== passwordConfirm)
-        this.errorMessage = 'Senhas Não São iguais'
-    }
   }
 
   onSaveComplete(): void {

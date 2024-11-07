@@ -5,47 +5,81 @@
     <div class="card-header">
       <h4>Registrar Usuário</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body m-2 p-5">
       <!-- form -->
       <form (ngSubmit)="saveUser()" [formGroup]="userForm">
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label" for="name"> <strong> Name: </strong> </label>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <input class="form-control m-2" type="text" id="name" name="name" placeholder="Type your full name"
               formControlName="name">
+          </div>
+          <div class="text-danger" *ngIf="userForm.controls['name'].invalid && 
+              (userForm.controls['name'].touched || userForm.controls['name'].dirty)">
+            <span *ngIf="userForm.controls['name'].errors?.['required']"> Campo é obrigatório!</span>
+            <span *ngIf="userForm.controls['name'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+            <span *ngIf="userForm.controls['name'].errors?.['maxlength']"> Máximo 20 caracteres!</span>
           </div>
         </div>
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label" for="email"> <strong> Email: </strong> </label>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <input class="form-control m-2" type="email" id="email" name="email" placeholder="youremail@gmail.com"
               formControlName="email">
+          </div>
+          <div class="text-danger" *ngIf="userForm.controls['email'].invalid && 
+              (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+            <span *ngIf="userForm.controls['email'].errors?.['required']"> Campo é obrigatório!</span>
+            <span *ngIf="userForm.controls['email'].errors?.['email']"> Formato Email é obrigatório!</span>
           </div>
         </div>
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label" for="username"> <strong> Username: </strong> </label>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <input class="form-control m-2" type="text" id="username" name="username" placeholder="Type a username"
               formControlName="username">
+          </div>
+          <div class="text-danger" *ngIf="userForm.controls['username'].invalid && 
+              (userForm.controls['username'].touched || userForm.controls['username'].dirty)">
+            <span *ngIf="userForm.controls['username'].errors?.['required']"> Campo é obrigatório!</span>
+            <span *ngIf="userForm.controls['username'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+            <span *ngIf="userForm.controls['username'].errors?.['maxlength']"> Máximo 20 caracteres!</span>
           </div>
         </div>
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label" for="password"> <strong> Password </strong>: </label>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <input class="form-control m-2" type="password" id="password" name="password" formControlName="password"
               placeholder="Type your password">
+          </div>
+          <div class="text-danger" *ngIf="userForm.controls['password'].invalid && 
+              (userForm.controls['password'].touched || userForm.controls['password'].dirty)">
+            <span *ngIf="userForm.controls['password'].errors?.['required']"> Campo é obrigatório!</span>
+            <span *ngIf="userForm.controls['password'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+            <span *ngIf="userForm.controls['password'].errors?.['maxlength']"> Máximo 20 caracteres!</span>
           </div>
         </div>
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label" for="passwordConfirm"> <strong> Password Confirm: </strong> </label>
-          <div class="col-md-8">
+          <div class="col-md-9">
             <input class="form-control m-2" type="password" id="passwordConfirm" name="passwordConfirm"
               formControlName="passwordConfirm" placeholder="Type your password">
           </div>
+          <div class="text-danger" *ngIf="userForm.controls['passwordConfirm'].invalid && 
+              (userForm.controls['passwordConfirm'].touched || userForm.controls['passwordConfirm'].dirty)">
+            <span *ngIf="userForm.controls['passwordConfirm'].errors?.['required']"> Campo é obrigatório!</span>
+            <span *ngIf="userForm.controls['passwordConfirm'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+            <span *ngIf="userForm.controls['passwordConfirm'].errors?.['maxlength']"> Máximo 20 caracteres!</span>
+          </div>
+        </div>
+        <!-- Alert -->
+        <div class="alert alert-danger show offset-md-3 col-md-6" *ngIf="errorMessage">
+          <strong> {{errorMessage}} </strong>
+          <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
         </div>
         <!-- actions -->
         <div class="form-group row">
-          <div class="offset-md-2 col-md-6">
+          <div class="offset-md-3 col-md-6">
             <button class="btn btn-primary m-2" type="submit"
               [title]="userForm.valid ? 'Salvar' : 'Desabilitado até validar campos' " [disabled]="!userForm.valid">
               Salvar
@@ -54,11 +88,6 @@
               Cancelar
             </button>
           </div>
-        </div>
-        <!-- Alert -->
-        <div class="alert alert-danger m-2 alert-dismissible fade show" role="alert" *ngIf="errorMessage">
-          <strong> {{errorMessage}} </strong>
-          <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
         </div>
       </form>
     </div>

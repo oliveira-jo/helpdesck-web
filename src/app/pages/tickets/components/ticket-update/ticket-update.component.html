@@ -2,9 +2,7 @@
   <div class="card  m-5">
     <!-- Header -->
     <div class="card-header">
-      <strong>
-        Editar Ticket
-      </strong>
+      <h4> Editar Ticket </h4>
     </div>
     <div class="card-body">
       <!-- form -->
@@ -14,6 +12,12 @@
           <div class="col-md-8">
             <input class="form-control" type="text" id="subject" name="subject" placeholder="Type a subjct of ticket"
               formControlName="subject">
+            <div class="text-danger" *ngIf="ticketForm.controls['subject'].invalid && 
+                  (ticketForm.controls['subject'].touched || ticketForm.controls['subject'].dirty)">
+              <span *ngIf="ticketForm.controls['subject'].errors?.['required']"> Campo é obrigatório!</span>
+              <span *ngIf="ticketForm.controls['subject'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+              <span *ngIf="ticketForm.controls['subject'].errors?.['maxlength']"> Máximo 50 caracteres!</span>
+            </div>
           </div>
         </div>
         <div class="form-group row">
@@ -22,6 +26,12 @@
             <textarea class="form-control m-2" name="description" id="description" rows="10"
               placeholder="Type a tickets description" formControlName="description">
             </textarea>
+            <div class="text-danger" *ngIf="ticketForm.controls['description'].invalid && 
+                (ticketForm.controls['description'].touched || ticketForm.controls['description'].dirty)">
+              <span *ngIf="ticketForm.controls['description'].errors?.['required']"> Campo é obrigatório!</span>
+              <span *ngIf="ticketForm.controls['description'].errors?.['minlength']"> Mínimo 3 caracteres!</span>
+              <span *ngIf="ticketForm.controls['description'].errors?.['maxlength']"> Máximo 1000 caracteres!</span>
+            </div>
           </div>
         </div>
         <div class="form-group row mt-4">
@@ -50,22 +60,6 @@
             </div>
           </div>
         </div>
-        <!-- Ticket informations -->
-        <!-- <div class="form-group row  mt-4">
-          <label class="col-md-2 col-form-label" for="description"> Detalhes </label>
-          <div class="col-md-8">
-            <ng-container *ngIf="ticket">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Criado por: {{ticket.createdBy?.username}}</li>
-                <li class="list-group-item">Atendido por: {{ticket.supportUser?.username}}</li>
-                <li class="list-group-item">Criado na data: {{ticket.createdAt}}</li>
-                <li class="list-group-item">Status: {{ticket.status}}</li>
-                <li class="list-group-item">Modificado por: {{ticket.updatedBy?.username}}</li>
-                <li class="list-group-item">Data Modificaçao: {{ticket.updateAt}}</li>
-              </ul>
-            </ng-container>
-          </div>
-        </div> -->
         <!-- actions -->
         <div class="form-group row mt-4">
           <div class="offset-md-2 col-md-6">
