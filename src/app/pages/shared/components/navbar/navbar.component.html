@@ -10,7 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item" *ngIf="isAdminLogged()">
+          <li class="nav-item">
             <a class="nav-link"> Olá, {{ getUsername() }} </a>
           </li>
         </ul>
@@ -56,7 +56,7 @@
           <button class="btn btn-outline-secondary m-2" [routerLink]='["/tickets"]'>Solicitações</button>
           <!-- *********************************************************************************************************************** -->
           <!-- Implement the painel of datas of user and his management -->
-          <button class="btn btn-outline-secondary m-2" [routerLink]="['/user', getId() ,'update']">
+          <button class="btn btn-outline-secondary m-2" [routerLink]="['/user', getId() ,'details']">
             Gerenciar Conta </button>
           <button class="btn btn-outline-secondary m-2" (click)="logout()"> Sair</button>
         </form>

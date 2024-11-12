@@ -1,0 +1,42 @@
+<div class="container">
+
+  <div class="card m-5" *ngIf="user">
+    <div class="card-header">
+      <h4>Olá, {{user.name}} </h4>
+    </div>
+    <div class="card-body m-2 p-5">
+      <div class="form-group row mb-2">
+        <label class="col-md-9 col-form-label" for="email"> Name: <strong> {{user.name}} </strong> </label>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-9 col-form-label" for="email"> Username - login: <strong> {{user.username}} </strong>
+        </label>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-9 col-form-label" for="username"> Email: <strong> {{user.email}} </strong> </label>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-9 col-form-label" for="username"> Usuário Ativo: <strong> {{user.active}} </strong>
+        </label>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-9 col-form-label" for="username"> Conta:
+          <button class="btn btn-sm btn-outline-primary" [routerLink]="['/user', user.id , 'update']"> Alterar Dados
+            Pessoais
+          </button>
+        </label>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-9 col-form-label" for="username"> Segurança:
+          <button class="btn btn-sm btn-outline-primary" [routerLink]="['/user', user.id , 'updatepassword']"> Alterar
+            Senha </button>
+        </label>
+      </div>
+      <!-- Alert  -->
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+        <strong> {{errorMessage}} </strong>
+        <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+      </div>
+    </div>
+  </div>
+</div>

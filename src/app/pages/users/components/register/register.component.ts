@@ -36,9 +36,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UsersService,
-
   ) {
-
   }
 
   ngOnInit() {
@@ -73,7 +71,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   saveUser(): void {
 
     if (this.userForm.valid) {
-
       if (this.userForm.dirty) {
 
         if (this.userForm.controls['password'].value === this.userForm.controls['passwordConfirm'].value) {

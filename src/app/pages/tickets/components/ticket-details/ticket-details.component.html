@@ -11,7 +11,7 @@
         <div class="card shadow-sm flex-row">
           <!-- TICKET SUBJECT -->
           <!-- <div class="card shadow-sm"> -->
-          <div class="card-body">
+          <div class="card-body" *ngIf="ticket">
             <h3 class="card-title pricing-card-title"> Assunto:
               <small class="text-muted fw-light"> {{ ticket.subject }} </small>
             </h3>
@@ -21,7 +21,7 @@
           </div>
           <!-- </div> -->
           <!-- TICKET DETAILS -->
-          <div class="card shadow-sm border-secondary">
+          <div class="card shadow-sm border-secondary" *ngIf="ticket">
             <div class="card-header py-3 text-higth text-white bg-secondary border-secondary">
               <h4 class="my-0 fw-normal">Ticket Detalhes</h4>
             </div>
@@ -48,7 +48,7 @@
           </div>
         </div>
         <!-- BUTTONS -->
-        <div id="buttons" class="py-3 text-white">
+        <div id="buttons" class="py-3 text-white" *ngIf="ticket">
           <button type="button" class="btn btn-primary m-2"
             [routerLink]="['/tickets', ticket.id , 'interaction','create']">
             <i class="fa fa-plus"></i> Nova Interação </button>
@@ -60,6 +60,11 @@
         <!-- LIST OF TICKET INTERACTIONS -->
         <div>
           <app-list-ticket-interactions></app-list-ticket-interactions>
+        </div>
+        <!-- Alert  -->
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+          <strong> {{errorMessage}} </strong>
+          <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
         </div>
       </div>
     </div>

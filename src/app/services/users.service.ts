@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 
 import { user } from '../models/user';
 import { NumberOfUsersResponse } from '../models/numberOfUsers-response.type';
+import { userPassword } from '../models/userPassword';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class UsersService {
   }
 
   numberOfUsers(): any {
-    return this.http.get<NumberOfUsersResponse>(this.urlApi + '/numberOfUsers', { headers: this.jsonHeaders }) //add header
+    return this.http.get<NumberOfUsersResponse>(this.urlApi + '/numberOfUsers', { headers: this.jsonHeaders })
       .subscribe({
         next: NumberOfUsersResponse => {
           this.numberUsers = NumberOfUsersResponse;
@@ -34,13 +35,13 @@ export class UsersService {
           console.error('Observable emitted an error: ' + err);
         },
         complete: () => {
-          console.log('** Observable emitted the complete notification **');
+          //console.log('** Observable emitted the complete notification **');
         }
       });
   }
 
   getAllUsers(): Observable<user[]> {
-    return this.http.get<user[]>(this.urlApi + '/GetUsers', { headers: this.jsonHeaders }) // add header
+    return this.http.get<user[]>(this.urlApi + '/GetUsers', { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );
@@ -51,7 +52,7 @@ export class UsersService {
       return of(this.initUser());
     }
     const urlId = `${this.urlApi}/${id}`;
-    return this.http.get<user>(urlId) //add header
+    return this.http.get<user>(urlId)
       .pipe(
         catchError(this.handleError)
       );
@@ -67,6 +68,14 @@ export class UsersService {
   update(user: user) {
     const urlId = `${this.urlApi}/${user.id}`;
     return this.http.put<user>(urlId, user, { headers: this.jsonHeaders })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updatePassword(userPassword: userPassword) {
+    const urlId = `${this.urlApi}/updatePassword/${userPassword.id}`;
+    return this.http.put<user>(urlId, userPassword, { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );

@@ -34,13 +34,10 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UsersService
-
   ) {
-
   }
 
   ngOnInit() {
-
     this.formMode = 'new';
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
@@ -51,7 +48,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
     this.subscription = this.route.paramMap.subscribe(
       params => {
         const id = params.get('id');
-
         if (id == null || id == '') {
           const newUser: user = { id: '', name: '', username: '', email: '', password: '', active: false }
           this.showUser(newUser);
@@ -60,7 +56,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
         }
       }
     );
-
   }
 
   ngOnDestroy(): void {
@@ -71,16 +66,14 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
 
     this.userService.getUserById(id).subscribe(
       (user: user) => this.showUser(user),
-      (error: any) => console.log('UPDATE USER - error to search user ' + error.message),
+      (error: any) => console.log('Error to search user ' + error.message),
     )
   }
 
   showUser(user: user): void {
-
     if (this.userForm) {
       this.userForm.reset();
     }
-
     this.user = user;
 
     this.userForm.patchValue({
@@ -106,7 +99,6 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
   }
 
   updateUser(): void {
-
     if (this.userForm.valid) {
       if (this.userForm.dirty) {
 
@@ -123,9 +115,13 @@ export class UserUpdateComponent implements OnInit, OnDestroy {
     }
   }
 
+  navegateUserDetais() {
+    this.router.navigate([`/user/${this.user.id}/details`]);
+  }
+
   onSaveComplete(): void {
     this.userForm.reset();
-    this.router.navigate(['/users']);
+    this.router.navigate([`/user/${this.user.id}/details`]);
   }
 
   closeAlert() {

@@ -70,4 +70,8 @@ export class TicketDetailsComponent implements OnInit {
     this.router.navigate(['/tickets']);
   }
 
+  closeAlert() {
+    this.errorMessage = '';
+  }
+
 }

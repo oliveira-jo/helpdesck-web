@@ -20,7 +20,6 @@
         </div>
       </div>
     </div>
-
     <div class="table-responsive p-4">
       <table class="table mb-0">
         <thead>
@@ -39,6 +38,9 @@
             <td> {{user.email}} </td>
             <td> {{user.active}} </td>
             <td>
+              <button class="btn btn-outline-success btn-sm m-1" [routerLink]="['/user', user.id , 'details']">
+                <i class="fa fa-eye"></i>
+              </button>
               <button class="btn btn-outline-warning btn-sm m-1" [routerLink]="['/user', user.id , 'update']">
                 <i class="fa fa-edit"></i>
               </button>
@@ -49,6 +51,11 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- Alert -->
+    <div class="alert alert-danger show offset-md-3 col-md-6" *ngIf="errorMessage">
+      <strong> {{errorMessage}} </strong>
+      <button class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
     </div>
   </div>
 </div>

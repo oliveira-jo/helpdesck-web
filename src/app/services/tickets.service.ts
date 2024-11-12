@@ -24,7 +24,7 @@ export class TicketsService {
   }
 
   numberStatusOfTickets(): any {
-    return this.http.get<StatusResponse>(this.urlApi + '/numberOfStatus', { headers: this.jsonHeaders }) //add header
+    return this.http.get<StatusResponse>(this.urlApi + '/numberOfStatus', { headers: this.jsonHeaders })
       .subscribe({
         next: StatusResponse => {
           this.status = StatusResponse;
@@ -33,13 +33,13 @@ export class TicketsService {
           console.error('Observable emitted an error: ' + err);
         },
         complete: () => {
-          console.log('** Observable emitted the complete notification **');
+          //console.log('** Observable emitted the complete notification **');
         }
       });
   }
 
   getTickets(): Observable<ticket[]> {
-    return this.http.get<ticket[]>(this.urlApi, { headers: this.jsonHeaders }) //add header
+    return this.http.get<ticket[]>(this.urlApi, { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );
@@ -47,7 +47,7 @@ export class TicketsService {
 
   getTicketInteractions(ticketId: string): Observable<TickerInteractionResponse[]> {
     const urlInteraction = `${this.urlApi}/${ticketId}/interactions`;
-    return this.http.get<TickerInteractionResponse[]>(urlInteraction, { headers: this.jsonHeaders }) //add header
+    return this.http.get<TickerInteractionResponse[]>(urlInteraction, { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );
@@ -58,7 +58,7 @@ export class TicketsService {
       return of(this.initTicket());
     }
     const urlId = `${this.urlApi}/${id}`;
-    return this.http.get<ticket>(urlId, { headers: this.jsonHeaders }) // add header
+    return this.http.get<ticket>(urlId, { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );
@@ -81,7 +81,7 @@ export class TicketsService {
 
   update(ticket: ticket) {
     const urlId = `${this.urlApi}/${ticket.id}`;
-    return this.http.put<ticket>(urlId, ticket, { headers: this.jsonHeaders }) //add header
+    return this.http.put<ticket>(urlId, ticket, { headers: this.jsonHeaders })
       .pipe(
         catchError(this.handleError)
       );

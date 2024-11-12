@@ -7,11 +7,13 @@ import { RegisterComponent } from './pages/users/components/register/register.co
 import { UsersListComponent } from './pages/users/components/users-list/users-list.component';
 import { authUserGuard } from './services/guards/auth-user.guard';
 import { TicketUpdateComponent } from './pages/tickets/components/ticket-update/ticket-update.component';
-import { UserUpdateComponent } from './pages/users/components/user-update/user-update.component';
 import { DashboardComponent } from './pages/users/components/dashboard/dashboard.component';
 import { TicketDetailsComponent } from './pages/tickets/components/ticket-details/ticket-details.component';
 import { TicketInteractionComponent } from './pages/tickets/components/ticket-interaction/ticket-interaction.component';
 import { ListTicketInteractionsComponent } from './pages/tickets/components/list-ticket-interactions/list-ticket-interactions.component';
+import { UserUpdateComponent } from './pages/users/components/user-update/user-update.component';
+import { UserPasswordUpdateComponent } from './pages/users/components/user-password-update/user-password-update.component';
+import { UserDetailsComponent } from './pages/users/components/user-details/user-details.component';
 
 export const routes: Routes = [
 
@@ -25,6 +27,8 @@ export const routes: Routes = [
   { path: 'users/dashbord', component: DashboardComponent, canActivate: [authUserGuard] },
   { path: 'users', component: UsersListComponent, canActivate: [authUserGuard] },
   { path: 'user/:id/update', component: UserUpdateComponent, canActivate: [authUserGuard] },
+  { path: 'user/:id/details', component: UserDetailsComponent, canActivate: [authUserGuard] },
+  { path: 'user/:id/updatepassword', component: UserPasswordUpdateComponent, canActivate: [authUserGuard] },
   { path: 'tickets', component: TicketsListComponent, canActivate: [authUserGuard] },
   { path: 'tickets/create', component: TicketCreationComponent, canActivate: [authUserGuard] },
   { path: 'tickets/:id/update', component: TicketUpdateComponent, canActivate: [authUserGuard] },

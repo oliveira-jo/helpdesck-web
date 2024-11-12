@@ -47,7 +47,9 @@ export class UsersListComponent implements OnInit {
         this.userService.delete(id)
           .subscribe(
             () => this.onSaveComplete(),
-            (error: any) => this.errorMessage = <any>error
+            () => {
+              this.errorMessage = ('Erro ao tentar excluir o usuário ')
+            }
           );
       }
     }
@@ -60,6 +62,10 @@ export class UsersListComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
+  }
+
+  closeAlert() {
+    this.errorMessage = '';
   }
 
 }
