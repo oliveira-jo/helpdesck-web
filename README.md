@@ -13,6 +13,65 @@
  ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white) 
 
 
+## Objective
+The main objective of this project is the development an Frontend to consume an API called HelpDesk, that was found in the Github hepo oliveira-jo. 
+Secondly is to apply all knowloag I got throw the years.   
+
+
+## Project Base 
++ SERVICES 
++ GUARDS (Auth User)
++ INTERCEPTORS (Token and Loading)
++ MODELS (ts)
++ COMPONENTS (html, css, ts)
+
+
+## Technologies Used
+* HTML
+* CSS
+* TypeScript
+* Angular 17
+* Bootstrap
+* Loading ngx-spinner
+* Git
+
+
+## Configuring app.config.ts
+
+```
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: loadingInterceptor,
+      multi: true
+    },
+    provideRouter(routes),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+  ]
+```
+
+
+## Configuring angular.json
+
+```
+  "styles": [
+      "src/styles.css",
+      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "node_modules/ngx-spinner/animations/square-jelly-box.css"
+  ],
+  "scripts": [
+    "node_modules/@popperjs/core/dist/umd/popper-base.min.js",
+    "node_modules/bootstrap/dist/js/bootstrap.min.js"
+  ]
+```
+
+
 # Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
