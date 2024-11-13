@@ -1,10 +1,11 @@
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { TokenInterceptor } from './services/interceptors/token.interceptor';
 
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './services/interceptors/token.interceptor';
+import { loadingInterceptor } from './services/interceptors/loading.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,7 +17,13 @@ export const appConfig: ApplicationConfig = {
       useClass: TokenInterceptor,
       multi: true
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: loadingInterceptor,
+      multi: true
+    },
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
   ]
 };

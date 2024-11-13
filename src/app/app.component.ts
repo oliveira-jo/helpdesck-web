@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './pages/shared/components/navbar/navbar.component';
 import { FooterComponent } from './pages/shared/components/footer/footer.component';
 import { BaseUiComponent } from "./pages/shared/components/base-ui/base-ui.component";
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { BaseUiComponent } from "./pages/shared/components/base-ui/base-ui.compo
     RouterOutlet,
     NavbarComponent,
     FooterComponent,
-    BaseUiComponent
+    BaseUiComponent,
+    NgxSpinnerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
