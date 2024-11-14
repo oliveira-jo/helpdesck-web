@@ -37,7 +37,7 @@
               Cadastros
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" [routerLink]='["/user/register"]'>Usuário Padrão</a>
+              <li><a class="dropdown-item" [routerLink]="['/user/register']">Usuário Padrão</a>
                 <!-- *********************************************************************************************************************** -->
                 <!-- Implement the role about add a tecn user and mor admins -->
                 <!-- <li><a class="dropdown-item" [routerLink]='["/"]'>Técnico</a> -->
@@ -62,9 +62,11 @@
         </form>
         <!-- ****************************************** Login and Register ****************************************** -->
         <form class="d-flex" *ngIf="!isLogged()">
-          <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]='["/user/login"]'>Login</button>
-          <button class="btn btn-outline-secondary m-2" type="submit"
-            [routerLink]='["/user/register"]'>Registrar</button>
+          <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/user/login']">Login</button>
+
+          <button class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/user/register']"> Registrar
+          </button>
+
         </form>
       </div>
     </div>
