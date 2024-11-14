@@ -22,25 +22,27 @@ export class TokenInterceptor implements HttpInterceptor {
     const apiUrl: Array<any> = environment.baseUrl.split('/');
 
     if (token && requestUrl[2] === apiUrl[2]) {
+
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
           token: `${token}`
         }
       });
-      return next.handle(request)
-        .pipe(
-          catchError(
-            error => {
-              if (error instanceof HttpErrorResponse && error.status === 401) {
-                this.authService.logout();
-              }
-              return throwError(error.message);
+
+      return next.handle(request).pipe(
+        catchError(
+          error => {
+
+            if (error instanceof HttpErrorResponse && error.status === 401 || error.status === 403) {
+              this.authService.logout();
             }
-          )
-        );
-    }
-    else {
+            return throwError(error.message);
+          }
+        ));
+
+    } else {
+      this.authService.logout();
       return next.handle(request);
     }
   }

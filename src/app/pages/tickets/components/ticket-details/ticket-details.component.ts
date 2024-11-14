@@ -7,6 +7,8 @@ import { ticket } from '../../../../models/ticket';
 import { TicketsService } from '../../../../services/tickets.service';
 import { TicketInteractionComponent } from "../ticket-interaction/ticket-interaction.component";
 import { ListTicketInteractionsComponent } from "../list-ticket-interactions/list-ticket-interactions.component";
+import { UsersService } from '../../../../services/users.service';
+import { user } from '../../../../models/user';
 
 @Component({
   selector: 'app-ticket-details',
@@ -29,7 +31,7 @@ export class TicketDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ticketService: TicketsService
+    private ticketService: TicketsService,
 
   ) { }
 
@@ -48,7 +50,9 @@ export class TicketDetailsComponent implements OnInit {
 
   getTicket(id: string): void {
     this.ticketService.getTicket(id).subscribe(
-      (ticket: ticket) => this.ticket = ticket,
+      (ticket: ticket) => {
+        this.ticket = ticket
+      },
       (error: any) => this.errorMessage = <any>error
     )
   }
