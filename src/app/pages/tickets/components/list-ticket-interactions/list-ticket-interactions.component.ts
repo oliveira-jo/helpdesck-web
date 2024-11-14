@@ -7,7 +7,6 @@ import { TicketsService } from '../../../../services/tickets.service';
 import { TicketInteraction } from '../../../../models/ticket-interaction';
 import { TickerInteractionResponse } from '../../../../models/ticket-interaction-response';
 
-
 @Component({
   selector: 'app-list-ticket-interactions',
   standalone: true,
@@ -54,19 +53,15 @@ export class ListTicketInteractionsComponent implements OnInit {
   getTicketInteractions(id: string) {
     this.ticketsService.getTicketInteractions(id).subscribe({
       next: tickerInteractionResponse => {
-
-        console.log(tickerInteractionResponse);
-
         this.ticketInteractions = tickerInteractionResponse;
-        console.log(this.ticketInteractions);
-
+        //console.log(this.ticketInteractions);
       },
       error: err => {
-        console.log(' ** Erro: ', err.message);
         this.errorMessage = <any>err.message;
+        //console.log(' ** Erro: ', err.message);
       },
       complete: () => {
-        console.log('Finalizou Ticket Interactions List');
+        //console.log('Finalizou Ticket Interactions List');
       }
     });
   }

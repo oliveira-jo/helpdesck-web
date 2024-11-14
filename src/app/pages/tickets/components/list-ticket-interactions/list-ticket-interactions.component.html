@@ -12,7 +12,7 @@
     <div class="table-responsive m-2 p-2">
       <table class="table">
         <tbody>
-          <tr *ngFor="let interaction of ticketInteractions">
+          <tr *ngFor="let interaction of ticketInteractions?.reverse()">
             <td> Mensagem: {{ interaction.message }} </td>
             <td> Criado por: {{ interaction.sentByUser.name }} </td>
             <td> Data: {{ interaction.createdAt | date }} </td>
