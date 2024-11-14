@@ -30,16 +30,16 @@
                 <small class="text-muted fw-light"> {{ticket.status}} </small>
               </h4>
               <h4 class="card-title pricing-card-title"> Criado Por:
-                <small class="text-muted fw-light"> {{ticket.createdBy?.username}} </small>
+                <small class="text-muted fw-light"> {{ticket.createdBy?.name}} </small>
               </h4>
               <h4 class="card-title pricing-card-title"> Data Criação:
                 <small class="text-muted fw-light"> {{ticket.createdAt | date}} </small>
               </h4>
               <h4 class="card-title pricing-card-title"> Atendido Por:
-                <small class="text-muted fw-light"> {{ticket.supportUser?.username}} </small>
+                <small class="text-muted fw-light"> {{ticket.supportUser?.name}} </small>
               </h4>
               <h4 class="card-title pricing-card-title"> Modificação Por:
-                <small class="text-muted fw-light"> {{ticket.updatedBy}} </small>
+                <small class="text-muted fw-light"> {{ticket.updatedBy?.name}} </small>
               </h4>
               <h4 class="card-title pricing-card-title"> Data Modificação:
                 <small class="text-muted fw-light"> {{ticket.updateAt | date}} </small>
