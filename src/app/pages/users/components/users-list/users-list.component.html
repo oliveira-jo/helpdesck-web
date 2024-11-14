@@ -38,10 +38,10 @@
             <td> {{user.email}} </td>
             <td> {{user.active}} </td>
             <td>
-              <button class="btn btn-outline-success btn-sm m-1" [routerLink]="['/user', user.id , 'details']">
+              <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/user', user.id , 'details']">
                 <i class="fa fa-eye"></i>
               </button>
-              <button class="btn btn-outline-warning btn-sm m-1" [routerLink]="['/user', user.id , 'update']">
+              <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/user', user.id , 'update']">
                 <i class="fa fa-edit"></i>
               </button>
               <button class="btn btn-outline-danger btn-sm" (click)="deleteUser(user.id!)">

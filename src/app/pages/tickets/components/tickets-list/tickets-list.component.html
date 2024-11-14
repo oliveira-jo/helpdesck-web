@@ -28,13 +28,32 @@
         <tbody>
           <tr *ngFor="let ticket of tickets?.reverse()">
             <td> {{ticket.subject}} </td>
-            <td> {{ticket.createdBy?.username}} </td>
-            <td> {{ticket.status}} </td>
             <td>
-              <button class="btn btn-outline-success btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'details']">
+              {{ticket.createdBy?.username}}
+            </td>
+            <td>
+              @if (ticket.status === 'OPEN') {
+              <button class="btn btn-danger btn-sm m-1"></button>
+              }
+              @if (ticket.status === 'AWAITING_CUSTOMER_ANSWER') {
+              <button class="btn btn-warning btn-sm m-1"></button>
+              }
+              @if (ticket.status === 'IN_PROGRESS') {
+              <button class="btn btn-danger btn-sm m-1"></button>
+              }
+              @if (ticket.status === 'CANCELLED') {
+              <button class="btn btn-secondary btn-sm m-1"></button>
+              }
+              @if (ticket.status === 'RESOLVED') {
+              <button class="btn btn-secondary btn-sm m-1"></button>
+              }
+              {{ticket.status}}
+            </td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'details']">
                 <i class="fa fa-eye"></i>
               </button>
-              <button class="btn btn-outline-warning btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'update']">
+              <button class="btn btn-outline-primary btn-sm m-1" [routerLink]="['/tickets', ticket.id , 'update']">
                 <i class="fa fa-edit"></i>
               </button>
               <button class="btn btn-outline-danger btn-sm  m-1" (click)="deleteTicket(ticket.id!)">
