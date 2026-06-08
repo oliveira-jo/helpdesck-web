@@ -16,9 +16,11 @@ export class AuthService {
 
   login(username: string, password: string): Observable<LoginResponse> {
     const urlLogin = `${environment.baseUrl}/api/v1/auth/login`;
+    // console.log('Login URL:', urlLogin); // Debugging line to check the URL
     return this.http.post<LoginResponse>(urlLogin, { username, password })
       .pipe(
         tap((response) => {
+          // console.log('Login Response:', response); // Debugging line to check the response
           if (response.accessToken === '') return;
           localStorage.setItem('token', btoa(JSON.stringify(response.accessToken)));
           localStorage.setItem('username', btoa(JSON.stringify(response.username)));

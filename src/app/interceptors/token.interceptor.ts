@@ -1,12 +1,11 @@
 
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
 import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
