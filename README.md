@@ -16,7 +16,7 @@ Frontend project built with Angular to consume the HelpDesk API. The application
 
 ---
 ## Preview
-![Preview](frontend/public/preview.jpg)
+![Preview](src/assets/preview.jpg)
 
 ---
 
