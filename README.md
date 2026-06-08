@@ -14,6 +14,12 @@
 
 Frontend project built with Angular to consume the HelpDesk API. The application focuses on ticket management, user authentication and administrative dashboards.
 
+---
+## Preview
+![Preview](frontend/public/preview.jpg)
+
+---
+
 ## 🚀 Technologies
 - Angular 17
 - TypeScript
