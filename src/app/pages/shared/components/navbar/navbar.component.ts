@@ -11,9 +11,7 @@ import { AuthService } from '../../../../services/auth.service';
   imports: [
     RouterLink,
     NgIf,
-    ReactiveFormsModule,
-    RouterLink,
-    RouterOutlet
+    ReactiveFormsModule
   ],
   providers: [
     AuthService

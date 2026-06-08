@@ -4,8 +4,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { TokenInterceptor } from './services/interceptors/token.interceptor';
-import { loadingInterceptor } from './services/interceptors/loading.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 
 
 export const appConfig: ApplicationConfig = {

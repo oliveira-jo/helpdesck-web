@@ -5,7 +5,7 @@ import { TicketCreationComponent } from './pages/tickets/components/ticket-creat
 import { LoginComponent } from './pages/users/components/login/login.component';
 import { RegisterComponent } from './pages/users/components/register/register.component';
 import { UsersListComponent } from './pages/users/components/users-list/users-list.component';
-import { authUserGuard } from './services/guards/auth-user.guard';
+import { authUserGuard } from './guards/auth-user.guard';
 import { TicketUpdateComponent } from './pages/tickets/components/ticket-update/ticket-update.component';
 import { DashboardComponent } from './pages/users/components/dashboard/dashboard.component';
 import { TicketDetailsComponent } from './pages/tickets/components/ticket-details/ticket-details.component';

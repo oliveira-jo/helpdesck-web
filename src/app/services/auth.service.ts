@@ -45,7 +45,7 @@ export class AuthService {
       : null;
   }
 
-  get getUserToken(): string {
+  get getUserToken(): string | null {
     return localStorage.getItem('token')
       ? JSON.parse(atob(localStorage.getItem('token')!))
       : null;

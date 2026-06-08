@@ -1,4 +1,3 @@
-
 # HELPDESK PROJECT
 
 > Status: Finished V.1
@@ -13,92 +12,103 @@
  ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white) 
 
 
-## Objective
-The main objective of this project is the development an Frontend to consume an API called HelpDesk, that was found in the Github hepo oliveira-jo. 
-Secondly is to apply all knowloag I got throw the years.   
+Frontend project built with Angular to consume the HelpDesk API. The application focuses on ticket management, user authentication and administrative dashboards.
 
+## 🚀 Technologies
+- Angular 17
+- TypeScript
+- HTML / CSS
+- Bootstrap
+- ngx-spinner
+- Node.js / npm
+- Git
 
-## Project Base 
-+ SERVICES 
-+ GUARDS (Auth User)
-+ INTERCEPTORS (Token and Loading)
-+ MODELS (ts)
-+ COMPONENTS (html, css, ts)
+## 📋 Features
+- Authentication (login / logout)
+- CRUD for tickets
+- Queue/dashboard views
+- User profiles and basic permissions
+- Interceptors for token and loading spinner
 
+## 🏗️ Architecture
+The application is organized by domain: components, pages, services, guards, interceptors and models. Dependency Injection (providers) is used for interceptors and routing via RouterModule.
 
-## Technologies Used
-* HTML
-* CSS
-* TypeScript
-* Angular 17
-* Bootstrap
-* Loading ngx-spinner
-* Git
+## ⚙️ Prerequisites
+- Node.js >= 16 (recommended >= 18)
+- npm >= 8
+- Angular CLI (optional, helps with local commands): ng update @angular/core@17 @angular/cli@17
 
+## 🔧 Installation
+1. Clone the repository:
+   git clone https://github.com/oliveira-jo/helpdesck-web
+2. Change to the project folder:
+   cd helpdesk-page
+3. Install dependencies:
+   npm install
 
-## Configuring app.config.ts
+## ▶️ How to run
+- Development server:
+  npm run start
+  or
+  ng serve
+  Visit: http://localhost:4200
 
-```
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: loadingInterceptor,
-      multi: true
-    },
-    provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations(),
-  ]
-```
+- Production build:
+  npm run build
+  or
+  ng build --configuration production
+  Artifacts are generated in: dist/
 
+## 📡 API Endpoints
+Actual endpoints are defined in the HelpDesk API and environment variables. Check src/environments/environment.ts.
+Example placeholders:
+- POST /api/auth/login — authentication
+- GET /api/tickets — list tickets
+- POST /api/tickets — create ticket
+- GET /api/tickets/:id — ticket details
+- PUT /api/tickets/:id — update ticket
+- GET /api/users — users (admin)
 
-## Configuring angular.json
+Note: replace these URLs with the values from your environment file.
 
-```
-  "styles": [
-      "src/styles.css",
-      "node_modules/bootstrap/dist/css/bootstrap.min.css",
-      "node_modules/ngx-spinner/animations/square-jelly-box.css"
-  ],
-  "scripts": [
-    "node_modules/@popperjs/core/dist/umd/popper-base.min.js",
-    "node_modules/bootstrap/dist/js/bootstrap.min.js"
-  ]
-```
+## 🔐 Security
+- JWT token sent via the Authorization header by the TokenInterceptor.
+- Guards protect routes that require authentication.
+- Avoid storing non-expiring tokens in localStorage without additional measures (refresh tokens, secure cookies).
 
+## 📁 Project structure
+Overview of the typical repository structure:
+````
+src/
+├─ app/
+│  ├─ components/        # reusable components
+│  ├─ pages/             # pages/routes (login, dashboard, tickets)
+│  ├─ services/          # services for API calls
+│  ├─ guards/            # auth guards
+│  ├─ interceptors/      # TokenInterceptor, LoadingInterceptor
+│  ├─ models/            # interfaces / types
+│  ├─ shared/            # shared modules and utilities
+│  ├─ app.config.ts      # providers (interceptors, router)
+│  ├─ app.module.ts
+│  └─ main.ts
+├─ assets/
+├─ environments/
+│  ├─ environment.ts
+│  └─ environment.prod.ts
+├─ styles.css
+└─ index.html
 
-# Angular
+Other files:
+- angular.json
+- package.json
+- tsconfig.json
+- README.md
+````
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
-The main objective is project consume the Helpdesk API, that can find in this repository. 
-In second moment to study and apply tecnologys of front-end.  
+## 👨‍💻 Author
+- Name: Jonathan Oliveira
+- Contact: devjoliveira@gmail.com
 
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Final notes:
+- Update the endpoints, author and environment variables sections according to your real project.
+- Check src/environments to point the API URL and other settings.
